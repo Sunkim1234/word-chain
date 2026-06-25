@@ -21,5 +21,64 @@
     };
   }
 
+  // --- 브라우저 DOM 레이어 -------------------------------------------------
+  let engine = null;
+
+  async function init() {
+    const promptEl = document.getElementById('prompt');
+    try {
+      const res = await fetch('../backend/kids_nouns_safe_2plus.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      engine = new KkutuEngine(data.words, { targetAnswers: 5 });
+      render(engine.start());
+    } catch (e) {
+      promptEl.textContent = '단어 데이터를 불러오지 못했습니다. 로컬 서버(python3 -m http.server)로 실행했는지 확인하세요.';
+    }
+  }
+
+  function render(state) {
+    const v = toView(state);
+    document.getElementById('progress').textContent = v.progress;
+    document.getElementById('last-word').textContent = v.lastWord || '';
+    const promptEl = document.getElementById('prompt');
+    const optionsEl = document.getElementById('options');
+    const resultEl = document.getElementById('result');
+
+    if (v.status === 'playing') {
+      promptEl.textContent = v.prompt;
+      resultEl.hidden = true;
+      optionsEl.hidden = false;
+      optionsEl.innerHTML = '';
+      for (const word of v.options) {
+        const btn = document.createElement('button');
+        btn.className = 'card';
+        btn.textContent = word;
+        btn.addEventListener('click', function () { onCardClick(word); });
+        optionsEl.appendChild(btn);
+      }
+    } else {
+      optionsEl.hidden = true;
+      optionsEl.innerHTML = '';
+      resultEl.hidden = false;
+      promptEl.textContent = v.status === 'won' ? '성공! 🎉' : '아쉽지만 끝났어요';
+      document.getElementById('result-msg').textContent =
+        v.status === 'won' ? '끝까지 잘 이었어요!' : '';
+    }
+  }
+
+  function onCardClick(word) {
+    render(engine.answer(word));
+  }
+
+  if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('restart').addEventListener('click', function () {
+        render(engine.start());
+      });
+      init();
+    });
+  }
+
   return { toView };
 });

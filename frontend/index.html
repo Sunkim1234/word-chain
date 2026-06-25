@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>끝말잇기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header>
+      <div id="progress"></div>
+      <h1 id="prompt">불러오는 중…</h1>
+    </header>
+    <section id="stage">
+      <div id="last-word"></div>
+    </section>
+    <section id="options"></section>
+    <section id="result" hidden>
+      <p id="result-msg"></p>
+      <button id="restart">다시하기</button>
+    </section>
+  </main>
+  <script src="../backend/kkutu-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
