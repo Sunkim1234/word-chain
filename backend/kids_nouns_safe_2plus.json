@@ -1,0 +1,2351 @@
+{
+  "meta": {
+    "title": "유아~초2 끝말잇기 안전 풀(막다른 단어+한 글자 단어 제거)",
+    "level": "유아 ~ 초등학교 2학년",
+    "pos": "명사 (2글자 이상)",
+    "total": 308,
+    "note": "모든 단어 2글자 이상. 끝 음절로 시작하는 단어가 풀 안에 최소 1개 보장(막힘 없음).",
+    "category_counts": {
+      "가족과사람": 22,
+      "과일": 13,
+      "꽃과식물": 20,
+      "놀이와운동": 15,
+      "도형과색": 7,
+      "동물": 50,
+      "몸과건강": 14,
+      "시간과자연현상": 4,
+      "신체": 5,
+      "악기와예술": 8,
+      "옷과장신구": 16,
+      "음식": 24,
+      "일상사물": 17,
+      "자연과날씨": 7,
+      "장소": 15,
+      "주방과그릇": 11,
+      "집과가구": 21,
+      "채소": 14,
+      "탈것": 8,
+      "학교와학용품": 17
+    },
+    "removed_one_char": [
+      "감",
+      "강",
+      "게",
+      "곰",
+      "공",
+      "국",
+      "귀",
+      "귤",
+      "김",
+      "꽃",
+      "꿀",
+      "낮",
+      "눈",
+      "달",
+      "닭",
+      "돈",
+      "돌",
+      "들",
+      "등",
+      "떡",
+      "말",
+      "매",
+      "목",
+      "못",
+      "무",
+      "문",
+      "발",
+      "밤",
+      "밥",
+      "방",
+      "배",
+      "뱀",
+      "벌",
+      "벽",
+      "별",
+      "볼",
+      "봄",
+      "북",
+      "붓",
+      "비",
+      "빗",
+      "빵",
+      "산",
+      "섬",
+      "소",
+      "손",
+      "숲",
+      "실",
+      "쑥",
+      "약",
+      "양",
+      "역",
+      "연",
+      "옷",
+      "왕",
+      "원",
+      "윷",
+      "이",
+      "입",
+      "잎",
+      "자",
+      "잣",
+      "잼",
+      "전",
+      "절",
+      "종",
+      "죽",
+      "집",
+      "징",
+      "책",
+      "춤",
+      "칼",
+      "컵",
+      "코",
+      "콩",
+      "턱",
+      "톱",
+      "파",
+      "팔",
+      "팥",
+      "풀",
+      "학",
+      "해",
+      "혀",
+      "형",
+      "흙"
+    ],
+    "removed_newly_dead": [
+      "가게",
+      "개미",
+      "거미",
+      "거북",
+      "거실",
+      "교실",
+      "군인",
+      "귀뚜라미",
+      "급식실",
+      "기타",
+      "김밥",
+      "깻잎",
+      "나팔꽃",
+      "낙타",
+      "도마뱀",
+      "동그라미",
+      "동백",
+      "두루미",
+      "두리안",
+      "뒤집개",
+      "땅콩",
+      "매미",
+      "명절",
+      "무지개",
+      "미용실",
+      "백조",
+      "번개",
+      "벚꽃",
+      "베개",
+      "볶음밥",
+      "부침개",
+      "붕어빵",
+      "비빔밥",
+      "빵집",
+      "사각형",
+      "사진",
+      "삼각형",
+      "새벽",
+      "소파",
+      "손전등",
+      "손톱",
+      "수세미",
+      "스케치북",
+      "썰매",
+      "안개",
+      "양말",
+      "양파",
+      "얼룩말",
+      "연꽃",
+      "연못",
+      "열매",
+      "오각형",
+      "올빼미",
+      "우산",
+      "우주인",
+      "인형",
+      "장미",
+      "전등",
+      "제비꽃",
+      "조개",
+      "주말",
+      "주인",
+      "지우개",
+      "진흙",
+      "찌개",
+      "치타",
+      "칠판지우개",
+      "타조",
+      "팔찌",
+      "포클레인",
+      "피라미",
+      "화장실"
+    ]
+  },
+  "words": [
+    {
+      "word": "강아지",
+      "category": "동물",
+      "start": "강",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "고양이",
+      "category": "동물",
+      "start": "고",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "사자",
+      "category": "동물",
+      "start": "사",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "호랑이",
+      "category": "동물",
+      "start": "호",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "원숭이",
+      "category": "동물",
+      "start": "원",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "거북이",
+      "category": "동물",
+      "start": "거",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "돼지",
+      "category": "동물",
+      "start": "돼",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "염소",
+      "category": "동물",
+      "start": "염",
+      "end": "소",
+      "length": 2
+    },
+    {
+      "word": "여우",
+      "category": "동물",
+      "start": "여",
+      "end": "우",
+      "length": 2
+    },
+    {
+      "word": "늑대",
+      "category": "동물",
+      "start": "늑",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "고슴도치",
+      "category": "동물",
+      "start": "고",
+      "end": "치",
+      "length": 4
+    },
+    {
+      "word": "두더지",
+      "category": "동물",
+      "start": "두",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "코뿔소",
+      "category": "동물",
+      "start": "코",
+      "end": "소",
+      "length": 3
+    },
+    {
+      "word": "하마",
+      "category": "동물",
+      "start": "하",
+      "end": "마",
+      "length": 2
+    },
+    {
+      "word": "악어",
+      "category": "동물",
+      "start": "악",
+      "end": "어",
+      "length": 2
+    },
+    {
+      "word": "두꺼비",
+      "category": "동물",
+      "start": "두",
+      "end": "비",
+      "length": 3
+    },
+    {
+      "word": "코알라",
+      "category": "동물",
+      "start": "코",
+      "end": "라",
+      "length": 3
+    },
+    {
+      "word": "나무늘보",
+      "category": "동물",
+      "start": "나",
+      "end": "보",
+      "length": 4
+    },
+    {
+      "word": "물소",
+      "category": "동물",
+      "start": "물",
+      "end": "소",
+      "length": 2
+    },
+    {
+      "word": "족제비",
+      "category": "동물",
+      "start": "족",
+      "end": "비",
+      "length": 3
+    },
+    {
+      "word": "기니피그",
+      "category": "동물",
+      "start": "기",
+      "end": "그",
+      "length": 4
+    },
+    {
+      "word": "상어",
+      "category": "동물",
+      "start": "상",
+      "end": "어",
+      "length": 2
+    },
+    {
+      "word": "문어",
+      "category": "동물",
+      "start": "문",
+      "end": "어",
+      "length": 2
+    },
+    {
+      "word": "오징어",
+      "category": "동물",
+      "start": "오",
+      "end": "어",
+      "length": 3
+    },
+    {
+      "word": "낙지",
+      "category": "동물",
+      "start": "낙",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "새우",
+      "category": "동물",
+      "start": "새",
+      "end": "우",
+      "length": 2
+    },
+    {
+      "word": "해마",
+      "category": "동물",
+      "start": "해",
+      "end": "마",
+      "length": 2
+    },
+    {
+      "word": "멸치",
+      "category": "동물",
+      "start": "멸",
+      "end": "치",
+      "length": 2
+    },
+    {
+      "word": "고등어",
+      "category": "동물",
+      "start": "고",
+      "end": "어",
+      "length": 3
+    },
+    {
+      "word": "연어",
+      "category": "동물",
+      "start": "연",
+      "end": "어",
+      "length": 2
+    },
+    {
+      "word": "참새",
+      "category": "동물",
+      "start": "참",
+      "end": "새",
+      "length": 2
+    },
+    {
+      "word": "비둘기",
+      "category": "동물",
+      "start": "비",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "까치",
+      "category": "동물",
+      "start": "까",
+      "end": "치",
+      "length": 2
+    },
+    {
+      "word": "까마귀",
+      "category": "동물",
+      "start": "까",
+      "end": "귀",
+      "length": 3
+    },
+    {
+      "word": "제비",
+      "category": "동물",
+      "start": "제",
+      "end": "비",
+      "length": 2
+    },
+    {
+      "word": "부엉이",
+      "category": "동물",
+      "start": "부",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "갈매기",
+      "category": "동물",
+      "start": "갈",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "앵무새",
+      "category": "동물",
+      "start": "앵",
+      "end": "새",
+      "length": 3
+    },
+    {
+      "word": "뻐꾸기",
+      "category": "동물",
+      "start": "뻐",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "종달새",
+      "category": "동물",
+      "start": "종",
+      "end": "새",
+      "length": 3
+    },
+    {
+      "word": "나비",
+      "category": "동물",
+      "start": "나",
+      "end": "비",
+      "length": 2
+    },
+    {
+      "word": "사마귀",
+      "category": "동물",
+      "start": "사",
+      "end": "귀",
+      "length": 3
+    },
+    {
+      "word": "메뚜기",
+      "category": "동물",
+      "start": "메",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "방아깨비",
+      "category": "동물",
+      "start": "방",
+      "end": "비",
+      "length": 4
+    },
+    {
+      "word": "모기",
+      "category": "동물",
+      "start": "모",
+      "end": "기",
+      "length": 2
+    },
+    {
+      "word": "지렁이",
+      "category": "동물",
+      "start": "지",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "달팽이",
+      "category": "동물",
+      "start": "달",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "번데기",
+      "category": "동물",
+      "start": "번",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "풍뎅이",
+      "category": "동물",
+      "start": "풍",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "하늘소",
+      "category": "동물",
+      "start": "하",
+      "end": "소",
+      "length": 3
+    },
+    {
+      "word": "사과",
+      "category": "과일",
+      "start": "사",
+      "end": "과",
+      "length": 2
+    },
+    {
+      "word": "포도",
+      "category": "과일",
+      "start": "포",
+      "end": "도",
+      "length": 2
+    },
+    {
+      "word": "복숭아",
+      "category": "과일",
+      "start": "복",
+      "end": "아",
+      "length": 3
+    },
+    {
+      "word": "자두",
+      "category": "과일",
+      "start": "자",
+      "end": "두",
+      "length": 2
+    },
+    {
+      "word": "살구",
+      "category": "과일",
+      "start": "살",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "앵두",
+      "category": "과일",
+      "start": "앵",
+      "end": "두",
+      "length": 2
+    },
+    {
+      "word": "딸기",
+      "category": "과일",
+      "start": "딸",
+      "end": "기",
+      "length": 2
+    },
+    {
+      "word": "바나나",
+      "category": "과일",
+      "start": "바",
+      "end": "나",
+      "length": 3
+    },
+    {
+      "word": "오렌지",
+      "category": "과일",
+      "start": "오",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "망고",
+      "category": "과일",
+      "start": "망",
+      "end": "고",
+      "length": 2
+    },
+    {
+      "word": "무화과",
+      "category": "과일",
+      "start": "무",
+      "end": "과",
+      "length": 3
+    },
+    {
+      "word": "호두",
+      "category": "과일",
+      "start": "호",
+      "end": "두",
+      "length": 2
+    },
+    {
+      "word": "아몬드",
+      "category": "과일",
+      "start": "아",
+      "end": "드",
+      "length": 3
+    },
+    {
+      "word": "당근",
+      "category": "채소",
+      "start": "당",
+      "end": "근",
+      "length": 2
+    },
+    {
+      "word": "오이",
+      "category": "채소",
+      "start": "오",
+      "end": "이",
+      "length": 2
+    },
+    {
+      "word": "가지",
+      "category": "채소",
+      "start": "가",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "시금치",
+      "category": "채소",
+      "start": "시",
+      "end": "치",
+      "length": 3
+    },
+    {
+      "word": "감자",
+      "category": "채소",
+      "start": "감",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "고구마",
+      "category": "채소",
+      "start": "고",
+      "end": "마",
+      "length": 3
+    },
+    {
+      "word": "옥수수",
+      "category": "채소",
+      "start": "옥",
+      "end": "수",
+      "length": 3
+    },
+    {
+      "word": "토마토",
+      "category": "채소",
+      "start": "토",
+      "end": "토",
+      "length": 3
+    },
+    {
+      "word": "피망",
+      "category": "채소",
+      "start": "피",
+      "end": "망",
+      "length": 2
+    },
+    {
+      "word": "도라지",
+      "category": "채소",
+      "start": "도",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "연근",
+      "category": "채소",
+      "start": "연",
+      "end": "근",
+      "length": 2
+    },
+    {
+      "word": "우엉",
+      "category": "채소",
+      "start": "우",
+      "end": "엉",
+      "length": 2
+    },
+    {
+      "word": "생강",
+      "category": "채소",
+      "start": "생",
+      "end": "강",
+      "length": 2
+    },
+    {
+      "word": "근대",
+      "category": "채소",
+      "start": "근",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "김치",
+      "category": "음식",
+      "start": "김",
+      "end": "치",
+      "length": 2
+    },
+    {
+      "word": "라면",
+      "category": "음식",
+      "start": "라",
+      "end": "면",
+      "length": 2
+    },
+    {
+      "word": "국수",
+      "category": "음식",
+      "start": "국",
+      "end": "수",
+      "length": 2
+    },
+    {
+      "word": "만두",
+      "category": "음식",
+      "start": "만",
+      "end": "두",
+      "length": 2
+    },
+    {
+      "word": "과자",
+      "category": "음식",
+      "start": "과",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "케이크",
+      "category": "음식",
+      "start": "케",
+      "end": "크",
+      "length": 3
+    },
+    {
+      "word": "주스",
+      "category": "음식",
+      "start": "주",
+      "end": "스",
+      "length": 2
+    },
+    {
+      "word": "두부",
+      "category": "음식",
+      "start": "두",
+      "end": "부",
+      "length": 2
+    },
+    {
+      "word": "나물",
+      "category": "음식",
+      "start": "나",
+      "end": "물",
+      "length": 2
+    },
+    {
+      "word": "불고기",
+      "category": "음식",
+      "start": "불",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "갈비",
+      "category": "음식",
+      "start": "갈",
+      "end": "비",
+      "length": 2
+    },
+    {
+      "word": "삼겹살",
+      "category": "음식",
+      "start": "삼",
+      "end": "살",
+      "length": 3
+    },
+    {
+      "word": "피자",
+      "category": "음식",
+      "start": "피",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "햄버거",
+      "category": "음식",
+      "start": "햄",
+      "end": "거",
+      "length": 3
+    },
+    {
+      "word": "핫도그",
+      "category": "음식",
+      "start": "핫",
+      "end": "그",
+      "length": 3
+    },
+    {
+      "word": "돈가스",
+      "category": "음식",
+      "start": "돈",
+      "end": "스",
+      "length": 3
+    },
+    {
+      "word": "튀김",
+      "category": "음식",
+      "start": "튀",
+      "end": "김",
+      "length": 2
+    },
+    {
+      "word": "순두부",
+      "category": "음식",
+      "start": "순",
+      "end": "부",
+      "length": 3
+    },
+    {
+      "word": "떡볶이",
+      "category": "음식",
+      "start": "떡",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "순대",
+      "category": "음식",
+      "start": "순",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "호떡",
+      "category": "음식",
+      "start": "호",
+      "end": "떡",
+      "length": 2
+    },
+    {
+      "word": "간장",
+      "category": "음식",
+      "start": "간",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "된장",
+      "category": "음식",
+      "start": "된",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "고추장",
+      "category": "음식",
+      "start": "고",
+      "end": "장",
+      "length": 3
+    },
+    {
+      "word": "이마",
+      "category": "신체",
+      "start": "이",
+      "end": "마",
+      "length": 2
+    },
+    {
+      "word": "팔꿈치",
+      "category": "신체",
+      "start": "팔",
+      "end": "치",
+      "length": 3
+    },
+    {
+      "word": "엉덩이",
+      "category": "신체",
+      "start": "엉",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "발꿈치",
+      "category": "신체",
+      "start": "발",
+      "end": "치",
+      "length": 3
+    },
+    {
+      "word": "수염",
+      "category": "신체",
+      "start": "수",
+      "end": "염",
+      "length": 2
+    },
+    {
+      "word": "엄마",
+      "category": "가족과사람",
+      "start": "엄",
+      "end": "마",
+      "length": 2
+    },
+    {
+      "word": "할아버지",
+      "category": "가족과사람",
+      "start": "할",
+      "end": "지",
+      "length": 4
+    },
+    {
+      "word": "누나",
+      "category": "가족과사람",
+      "start": "누",
+      "end": "나",
+      "length": 2
+    },
+    {
+      "word": "동생",
+      "category": "가족과사람",
+      "start": "동",
+      "end": "생",
+      "length": 2
+    },
+    {
+      "word": "아기",
+      "category": "가족과사람",
+      "start": "아",
+      "end": "기",
+      "length": 2
+    },
+    {
+      "word": "이모",
+      "category": "가족과사람",
+      "start": "이",
+      "end": "모",
+      "length": 2
+    },
+    {
+      "word": "고모",
+      "category": "가족과사람",
+      "start": "고",
+      "end": "모",
+      "length": 2
+    },
+    {
+      "word": "친구",
+      "category": "가족과사람",
+      "start": "친",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "의사",
+      "category": "가족과사람",
+      "start": "의",
+      "end": "사",
+      "length": 2
+    },
+    {
+      "word": "간호사",
+      "category": "가족과사람",
+      "start": "간",
+      "end": "사",
+      "length": 3
+    },
+    {
+      "word": "요리사",
+      "category": "가족과사람",
+      "start": "요",
+      "end": "사",
+      "length": 3
+    },
+    {
+      "word": "농부",
+      "category": "가족과사람",
+      "start": "농",
+      "end": "부",
+      "length": 2
+    },
+    {
+      "word": "어부",
+      "category": "가족과사람",
+      "start": "어",
+      "end": "부",
+      "length": 2
+    },
+    {
+      "word": "화가",
+      "category": "가족과사람",
+      "start": "화",
+      "end": "가",
+      "length": 2
+    },
+    {
+      "word": "가수",
+      "category": "가족과사람",
+      "start": "가",
+      "end": "수",
+      "length": 2
+    },
+    {
+      "word": "배우",
+      "category": "가족과사람",
+      "start": "배",
+      "end": "우",
+      "length": 2
+    },
+    {
+      "word": "운동선수",
+      "category": "가족과사람",
+      "start": "운",
+      "end": "수",
+      "length": 4
+    },
+    {
+      "word": "과학자",
+      "category": "가족과사람",
+      "start": "과",
+      "end": "자",
+      "length": 3
+    },
+    {
+      "word": "목수",
+      "category": "가족과사람",
+      "start": "목",
+      "end": "수",
+      "length": 2
+    },
+    {
+      "word": "아이",
+      "category": "가족과사람",
+      "start": "아",
+      "end": "이",
+      "length": 2
+    },
+    {
+      "word": "공주",
+      "category": "가족과사람",
+      "start": "공",
+      "end": "주",
+      "length": 2
+    },
+    {
+      "word": "왕자",
+      "category": "가족과사람",
+      "start": "왕",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "마당",
+      "category": "집과가구",
+      "start": "마",
+      "end": "당",
+      "length": 2
+    },
+    {
+      "word": "창문",
+      "category": "집과가구",
+      "start": "창",
+      "end": "문",
+      "length": 2
+    },
+    {
+      "word": "지붕",
+      "category": "집과가구",
+      "start": "지",
+      "end": "붕",
+      "length": 2
+    },
+    {
+      "word": "계단",
+      "category": "집과가구",
+      "start": "계",
+      "end": "단",
+      "length": 2
+    },
+    {
+      "word": "침대",
+      "category": "집과가구",
+      "start": "침",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "책상",
+      "category": "집과가구",
+      "start": "책",
+      "end": "상",
+      "length": 2
+    },
+    {
+      "word": "의자",
+      "category": "집과가구",
+      "start": "의",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "식탁",
+      "category": "집과가구",
+      "start": "식",
+      "end": "탁",
+      "length": 2
+    },
+    {
+      "word": "옷장",
+      "category": "집과가구",
+      "start": "옷",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "책장",
+      "category": "집과가구",
+      "start": "책",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "시계",
+      "category": "집과가구",
+      "start": "시",
+      "end": "계",
+      "length": 2
+    },
+    {
+      "word": "스탠드",
+      "category": "집과가구",
+      "start": "스",
+      "end": "드",
+      "length": 3
+    },
+    {
+      "word": "선풍기",
+      "category": "집과가구",
+      "start": "선",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "냉장고",
+      "category": "집과가구",
+      "start": "냉",
+      "end": "고",
+      "length": 3
+    },
+    {
+      "word": "세탁기",
+      "category": "집과가구",
+      "start": "세",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "청소기",
+      "category": "집과가구",
+      "start": "청",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "텔레비전",
+      "category": "집과가구",
+      "start": "텔",
+      "end": "전",
+      "length": 4
+    },
+    {
+      "word": "전화기",
+      "category": "집과가구",
+      "start": "전",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "이불",
+      "category": "집과가구",
+      "start": "이",
+      "end": "불",
+      "length": 2
+    },
+    {
+      "word": "담요",
+      "category": "집과가구",
+      "start": "담",
+      "end": "요",
+      "length": 2
+    },
+    {
+      "word": "액자",
+      "category": "집과가구",
+      "start": "액",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "접시",
+      "category": "주방과그릇",
+      "start": "접",
+      "end": "시",
+      "length": 2
+    },
+    {
+      "word": "포크",
+      "category": "주방과그릇",
+      "start": "포",
+      "end": "크",
+      "length": 2
+    },
+    {
+      "word": "도마",
+      "category": "주방과그릇",
+      "start": "도",
+      "end": "마",
+      "length": 2
+    },
+    {
+      "word": "냄비",
+      "category": "주방과그릇",
+      "start": "냄",
+      "end": "비",
+      "length": 2
+    },
+    {
+      "word": "주전자",
+      "category": "주방과그릇",
+      "start": "주",
+      "end": "자",
+      "length": 3
+    },
+    {
+      "word": "국자",
+      "category": "주방과그릇",
+      "start": "국",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "쟁반",
+      "category": "주방과그릇",
+      "start": "쟁",
+      "end": "반",
+      "length": 2
+    },
+    {
+      "word": "물병",
+      "category": "주방과그릇",
+      "start": "물",
+      "end": "병",
+      "length": 2
+    },
+    {
+      "word": "빨대",
+      "category": "주방과그릇",
+      "start": "빨",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "행주",
+      "category": "주방과그릇",
+      "start": "행",
+      "end": "주",
+      "length": 2
+    },
+    {
+      "word": "앞치마",
+      "category": "주방과그릇",
+      "start": "앞",
+      "end": "마",
+      "length": 3
+    },
+    {
+      "word": "학교",
+      "category": "학교와학용품",
+      "start": "학",
+      "end": "교",
+      "length": 2
+    },
+    {
+      "word": "공책",
+      "category": "학교와학용품",
+      "start": "공",
+      "end": "책",
+      "length": 2
+    },
+    {
+      "word": "크레파스",
+      "category": "학교와학용품",
+      "start": "크",
+      "end": "스",
+      "length": 4
+    },
+    {
+      "word": "물감",
+      "category": "학교와학용품",
+      "start": "물",
+      "end": "감",
+      "length": 2
+    },
+    {
+      "word": "도화지",
+      "category": "학교와학용품",
+      "start": "도",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "가방",
+      "category": "학교와학용품",
+      "start": "가",
+      "end": "방",
+      "length": 2
+    },
+    {
+      "word": "책가방",
+      "category": "학교와학용품",
+      "start": "책",
+      "end": "방",
+      "length": 3
+    },
+    {
+      "word": "사전",
+      "category": "학교와학용품",
+      "start": "사",
+      "end": "전",
+      "length": 2
+    },
+    {
+      "word": "줄넘기",
+      "category": "학교와학용품",
+      "start": "줄",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "압정",
+      "category": "학교와학용품",
+      "start": "압",
+      "end": "정",
+      "length": 2
+    },
+    {
+      "word": "운동장",
+      "category": "학교와학용품",
+      "start": "운",
+      "end": "장",
+      "length": 3
+    },
+    {
+      "word": "교문",
+      "category": "학교와학용품",
+      "start": "교",
+      "end": "문",
+      "length": 2
+    },
+    {
+      "word": "교장",
+      "category": "학교와학용품",
+      "start": "교",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "학생",
+      "category": "학교와학용품",
+      "start": "학",
+      "end": "생",
+      "length": 2
+    },
+    {
+      "word": "숙제",
+      "category": "학교와학용품",
+      "start": "숙",
+      "end": "제",
+      "length": 2
+    },
+    {
+      "word": "방학",
+      "category": "학교와학용품",
+      "start": "방",
+      "end": "학",
+      "length": 2
+    },
+    {
+      "word": "소풍",
+      "category": "학교와학용품",
+      "start": "소",
+      "end": "풍",
+      "length": 2
+    },
+    {
+      "word": "바지",
+      "category": "옷과장신구",
+      "start": "바",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "치마",
+      "category": "옷과장신구",
+      "start": "치",
+      "end": "마",
+      "length": 2
+    },
+    {
+      "word": "원피스",
+      "category": "옷과장신구",
+      "start": "원",
+      "end": "스",
+      "length": 3
+    },
+    {
+      "word": "속옷",
+      "category": "옷과장신구",
+      "start": "속",
+      "end": "옷",
+      "length": 2
+    },
+    {
+      "word": "신발",
+      "category": "옷과장신구",
+      "start": "신",
+      "end": "발",
+      "length": 2
+    },
+    {
+      "word": "운동화",
+      "category": "옷과장신구",
+      "start": "운",
+      "end": "화",
+      "length": 3
+    },
+    {
+      "word": "구두",
+      "category": "옷과장신구",
+      "start": "구",
+      "end": "두",
+      "length": 2
+    },
+    {
+      "word": "장화",
+      "category": "옷과장신구",
+      "start": "장",
+      "end": "화",
+      "length": 2
+    },
+    {
+      "word": "모자",
+      "category": "옷과장신구",
+      "start": "모",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "넥타이",
+      "category": "옷과장신구",
+      "start": "넥",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "선글라스",
+      "category": "옷과장신구",
+      "start": "선",
+      "end": "스",
+      "length": 4
+    },
+    {
+      "word": "반지",
+      "category": "옷과장신구",
+      "start": "반",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "목걸이",
+      "category": "옷과장신구",
+      "start": "목",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "귀걸이",
+      "category": "옷과장신구",
+      "start": "귀",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "우비",
+      "category": "옷과장신구",
+      "start": "우",
+      "end": "비",
+      "length": 2
+    },
+    {
+      "word": "손수건",
+      "category": "옷과장신구",
+      "start": "손",
+      "end": "건",
+      "length": 3
+    },
+    {
+      "word": "호수",
+      "category": "자연과날씨",
+      "start": "호",
+      "end": "수",
+      "length": 2
+    },
+    {
+      "word": "폭포",
+      "category": "자연과날씨",
+      "start": "폭",
+      "end": "포",
+      "length": 2
+    },
+    {
+      "word": "골짜기",
+      "category": "자연과날씨",
+      "start": "골",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "나무",
+      "category": "자연과날씨",
+      "start": "나",
+      "end": "무",
+      "length": 2
+    },
+    {
+      "word": "줄기",
+      "category": "자연과날씨",
+      "start": "줄",
+      "end": "기",
+      "length": 2
+    },
+    {
+      "word": "단풍",
+      "category": "자연과날씨",
+      "start": "단",
+      "end": "풍",
+      "length": 2
+    },
+    {
+      "word": "우물",
+      "category": "자연과날씨",
+      "start": "우",
+      "end": "물",
+      "length": 2
+    },
+    {
+      "word": "해바라기",
+      "category": "꽃과식물",
+      "start": "해",
+      "end": "기",
+      "length": 4
+    },
+    {
+      "word": "코스모스",
+      "category": "꽃과식물",
+      "start": "코",
+      "end": "스",
+      "length": 4
+    },
+    {
+      "word": "국화",
+      "category": "꽃과식물",
+      "start": "국",
+      "end": "화",
+      "length": 2
+    },
+    {
+      "word": "수선화",
+      "category": "꽃과식물",
+      "start": "수",
+      "end": "화",
+      "length": 3
+    },
+    {
+      "word": "채송화",
+      "category": "꽃과식물",
+      "start": "채",
+      "end": "화",
+      "length": 3
+    },
+    {
+      "word": "봉숭아",
+      "category": "꽃과식물",
+      "start": "봉",
+      "end": "아",
+      "length": 3
+    },
+    {
+      "word": "무궁화",
+      "category": "꽃과식물",
+      "start": "무",
+      "end": "화",
+      "length": 3
+    },
+    {
+      "word": "소나무",
+      "category": "꽃과식물",
+      "start": "소",
+      "end": "무",
+      "length": 3
+    },
+    {
+      "word": "대나무",
+      "category": "꽃과식물",
+      "start": "대",
+      "end": "무",
+      "length": 3
+    },
+    {
+      "word": "단풍나무",
+      "category": "꽃과식물",
+      "start": "단",
+      "end": "무",
+      "length": 4
+    },
+    {
+      "word": "은행나무",
+      "category": "꽃과식물",
+      "start": "은",
+      "end": "무",
+      "length": 4
+    },
+    {
+      "word": "버드나무",
+      "category": "꽃과식물",
+      "start": "버",
+      "end": "무",
+      "length": 4
+    },
+    {
+      "word": "느티나무",
+      "category": "꽃과식물",
+      "start": "느",
+      "end": "무",
+      "length": 4
+    },
+    {
+      "word": "감나무",
+      "category": "꽃과식물",
+      "start": "감",
+      "end": "무",
+      "length": 3
+    },
+    {
+      "word": "사과나무",
+      "category": "꽃과식물",
+      "start": "사",
+      "end": "무",
+      "length": 4
+    },
+    {
+      "word": "선인장",
+      "category": "꽃과식물",
+      "start": "선",
+      "end": "장",
+      "length": 3
+    },
+    {
+      "word": "클로버",
+      "category": "꽃과식물",
+      "start": "클",
+      "end": "버",
+      "length": 3
+    },
+    {
+      "word": "갈대",
+      "category": "꽃과식물",
+      "start": "갈",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "억새",
+      "category": "꽃과식물",
+      "start": "억",
+      "end": "새",
+      "length": 2
+    },
+    {
+      "word": "담쟁이",
+      "category": "꽃과식물",
+      "start": "담",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "버스",
+      "category": "탈것",
+      "start": "버",
+      "end": "스",
+      "length": 2
+    },
+    {
+      "word": "택시",
+      "category": "탈것",
+      "start": "택",
+      "end": "시",
+      "length": 2
+    },
+    {
+      "word": "비행기",
+      "category": "탈것",
+      "start": "비",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "자전거",
+      "category": "탈것",
+      "start": "자",
+      "end": "거",
+      "length": 3
+    },
+    {
+      "word": "오토바이",
+      "category": "탈것",
+      "start": "오",
+      "end": "이",
+      "length": 4
+    },
+    {
+      "word": "우주선",
+      "category": "탈것",
+      "start": "우",
+      "end": "선",
+      "length": 3
+    },
+    {
+      "word": "킥보드",
+      "category": "탈것",
+      "start": "킥",
+      "end": "드",
+      "length": 3
+    },
+    {
+      "word": "열기구",
+      "category": "탈것",
+      "start": "열",
+      "end": "구",
+      "length": 3
+    },
+    {
+      "word": "공원",
+      "category": "장소",
+      "start": "공",
+      "end": "원",
+      "length": 2
+    },
+    {
+      "word": "시장",
+      "category": "장소",
+      "start": "시",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "병원",
+      "category": "장소",
+      "start": "병",
+      "end": "원",
+      "length": 2
+    },
+    {
+      "word": "약국",
+      "category": "장소",
+      "start": "약",
+      "end": "국",
+      "length": 2
+    },
+    {
+      "word": "우체국",
+      "category": "장소",
+      "start": "우",
+      "end": "국",
+      "length": 3
+    },
+    {
+      "word": "은행",
+      "category": "장소",
+      "start": "은",
+      "end": "행",
+      "length": 2
+    },
+    {
+      "word": "동물원",
+      "category": "장소",
+      "start": "동",
+      "end": "원",
+      "length": 3
+    },
+    {
+      "word": "식물원",
+      "category": "장소",
+      "start": "식",
+      "end": "원",
+      "length": 3
+    },
+    {
+      "word": "극장",
+      "category": "장소",
+      "start": "극",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "식당",
+      "category": "장소",
+      "start": "식",
+      "end": "당",
+      "length": 2
+    },
+    {
+      "word": "주차장",
+      "category": "장소",
+      "start": "주",
+      "end": "장",
+      "length": 3
+    },
+    {
+      "word": "정류장",
+      "category": "장소",
+      "start": "정",
+      "end": "장",
+      "length": 3
+    },
+    {
+      "word": "공항",
+      "category": "장소",
+      "start": "공",
+      "end": "항",
+      "length": 2
+    },
+    {
+      "word": "항구",
+      "category": "장소",
+      "start": "항",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "광장",
+      "category": "장소",
+      "start": "광",
+      "end": "장",
+      "length": 2
+    },
+    {
+      "word": "축구",
+      "category": "놀이와운동",
+      "start": "축",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "야구",
+      "category": "놀이와운동",
+      "start": "야",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "농구",
+      "category": "놀이와운동",
+      "start": "농",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "배구",
+      "category": "놀이와운동",
+      "start": "배",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "탁구",
+      "category": "놀이와운동",
+      "start": "탁",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "수영",
+      "category": "놀이와운동",
+      "start": "수",
+      "end": "영",
+      "length": 2
+    },
+    {
+      "word": "달리기",
+      "category": "놀이와운동",
+      "start": "달",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "팽이",
+      "category": "놀이와운동",
+      "start": "팽",
+      "end": "이",
+      "length": 2
+    },
+    {
+      "word": "딱지",
+      "category": "놀이와운동",
+      "start": "딱",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "공기",
+      "category": "놀이와운동",
+      "start": "공",
+      "end": "기",
+      "length": 2
+    },
+    {
+      "word": "제기",
+      "category": "놀이와운동",
+      "start": "제",
+      "end": "기",
+      "length": 2
+    },
+    {
+      "word": "장난감",
+      "category": "놀이와운동",
+      "start": "장",
+      "end": "감",
+      "length": 3
+    },
+    {
+      "word": "그네",
+      "category": "놀이와운동",
+      "start": "그",
+      "end": "네",
+      "length": 2
+    },
+    {
+      "word": "시소",
+      "category": "놀이와운동",
+      "start": "시",
+      "end": "소",
+      "length": 2
+    },
+    {
+      "word": "태권도",
+      "category": "놀이와운동",
+      "start": "태",
+      "end": "도",
+      "length": 3
+    },
+    {
+      "word": "장구",
+      "category": "악기와예술",
+      "start": "장",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "소고",
+      "category": "악기와예술",
+      "start": "소",
+      "end": "고",
+      "length": 2
+    },
+    {
+      "word": "나팔",
+      "category": "악기와예술",
+      "start": "나",
+      "end": "팔",
+      "length": 2
+    },
+    {
+      "word": "연극",
+      "category": "악기와예술",
+      "start": "연",
+      "end": "극",
+      "length": 2
+    },
+    {
+      "word": "영화",
+      "category": "악기와예술",
+      "start": "영",
+      "end": "화",
+      "length": 2
+    },
+    {
+      "word": "만화",
+      "category": "악기와예술",
+      "start": "만",
+      "end": "화",
+      "length": 2
+    },
+    {
+      "word": "동화",
+      "category": "악기와예술",
+      "start": "동",
+      "end": "화",
+      "length": 2
+    },
+    {
+      "word": "음악",
+      "category": "악기와예술",
+      "start": "음",
+      "end": "악",
+      "length": 2
+    },
+    {
+      "word": "세모",
+      "category": "도형과색",
+      "start": "세",
+      "end": "모",
+      "length": 2
+    },
+    {
+      "word": "네모",
+      "category": "도형과색",
+      "start": "네",
+      "end": "모",
+      "length": 2
+    },
+    {
+      "word": "마름모",
+      "category": "도형과색",
+      "start": "마",
+      "end": "모",
+      "length": 3
+    },
+    {
+      "word": "빨강",
+      "category": "도형과색",
+      "start": "빨",
+      "end": "강",
+      "length": 2
+    },
+    {
+      "word": "보라",
+      "category": "도형과색",
+      "start": "보",
+      "end": "라",
+      "length": 2
+    },
+    {
+      "word": "하양",
+      "category": "도형과색",
+      "start": "하",
+      "end": "양",
+      "length": 2
+    },
+    {
+      "word": "검정",
+      "category": "도형과색",
+      "start": "검",
+      "end": "정",
+      "length": 2
+    },
+    {
+      "word": "주사",
+      "category": "몸과건강",
+      "start": "주",
+      "end": "사",
+      "length": 2
+    },
+    {
+      "word": "반창고",
+      "category": "몸과건강",
+      "start": "반",
+      "end": "고",
+      "length": 3
+    },
+    {
+      "word": "붕대",
+      "category": "몸과건강",
+      "start": "붕",
+      "end": "대",
+      "length": 2
+    },
+    {
+      "word": "체온계",
+      "category": "몸과건강",
+      "start": "체",
+      "end": "계",
+      "length": 3
+    },
+    {
+      "word": "마스크",
+      "category": "몸과건강",
+      "start": "마",
+      "end": "크",
+      "length": 3
+    },
+    {
+      "word": "비누",
+      "category": "몸과건강",
+      "start": "비",
+      "end": "누",
+      "length": 2
+    },
+    {
+      "word": "치약",
+      "category": "몸과건강",
+      "start": "치",
+      "end": "약",
+      "length": 2
+    },
+    {
+      "word": "수건",
+      "category": "몸과건강",
+      "start": "수",
+      "end": "건",
+      "length": 2
+    },
+    {
+      "word": "화장지",
+      "category": "몸과건강",
+      "start": "화",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "휴지",
+      "category": "몸과건강",
+      "start": "휴",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "손톱깎이",
+      "category": "몸과건강",
+      "start": "손",
+      "end": "이",
+      "length": 4
+    },
+    {
+      "word": "면봉",
+      "category": "몸과건강",
+      "start": "면",
+      "end": "봉",
+      "length": 2
+    },
+    {
+      "word": "세수",
+      "category": "몸과건강",
+      "start": "세",
+      "end": "수",
+      "length": 2
+    },
+    {
+      "word": "양치",
+      "category": "몸과건강",
+      "start": "양",
+      "end": "치",
+      "length": 2
+    },
+    {
+      "word": "아침",
+      "category": "시간과자연현상",
+      "start": "아",
+      "end": "침",
+      "length": 2
+    },
+    {
+      "word": "어제",
+      "category": "시간과자연현상",
+      "start": "어",
+      "end": "제",
+      "length": 2
+    },
+    {
+      "word": "크리스마스",
+      "category": "시간과자연현상",
+      "start": "크",
+      "end": "스",
+      "length": 5
+    },
+    {
+      "word": "시간",
+      "category": "시간과자연현상",
+      "start": "시",
+      "end": "간",
+      "length": 2
+    },
+    {
+      "word": "동전",
+      "category": "일상사물",
+      "start": "동",
+      "end": "전",
+      "length": 2
+    },
+    {
+      "word": "편지",
+      "category": "일상사물",
+      "start": "편",
+      "end": "지",
+      "length": 2
+    },
+    {
+      "word": "상자",
+      "category": "일상사물",
+      "start": "상",
+      "end": "자",
+      "length": 2
+    },
+    {
+      "word": "선물",
+      "category": "일상사물",
+      "start": "선",
+      "end": "물",
+      "length": 2
+    },
+    {
+      "word": "촛불",
+      "category": "일상사물",
+      "start": "촛",
+      "end": "불",
+      "length": 2
+    },
+    {
+      "word": "건전지",
+      "category": "일상사물",
+      "start": "건",
+      "end": "지",
+      "length": 3
+    },
+    {
+      "word": "전구",
+      "category": "일상사물",
+      "start": "전",
+      "end": "구",
+      "length": 2
+    },
+    {
+      "word": "망치",
+      "category": "일상사물",
+      "start": "망",
+      "end": "치",
+      "length": 2
+    },
+    {
+      "word": "드라이버",
+      "category": "일상사물",
+      "start": "드",
+      "end": "버",
+      "length": 4
+    },
+    {
+      "word": "양동이",
+      "category": "일상사물",
+      "start": "양",
+      "end": "이",
+      "length": 3
+    },
+    {
+      "word": "풍선",
+      "category": "일상사물",
+      "start": "풍",
+      "end": "선",
+      "length": 2
+    },
+    {
+      "word": "비행접시",
+      "category": "일상사물",
+      "start": "비",
+      "end": "시",
+      "length": 4
+    },
+    {
+      "word": "깃발",
+      "category": "일상사물",
+      "start": "깃",
+      "end": "발",
+      "length": 2
+    },
+    {
+      "word": "지도",
+      "category": "일상사물",
+      "start": "지",
+      "end": "도",
+      "length": 2
+    },
+    {
+      "word": "나침반",
+      "category": "일상사물",
+      "start": "나",
+      "end": "반",
+      "length": 3
+    },
+    {
+      "word": "돋보기",
+      "category": "일상사물",
+      "start": "돋",
+      "end": "기",
+      "length": 3
+    },
+    {
+      "word": "우산꽂이",
+      "category": "일상사물",
+      "start": "우",
+      "end": "이",
+      "length": 4
+    }
+  ]
+}
