@@ -1,0 +1,315 @@
+/* ============================================================
+   끝말 기차 — Version 1
+   차분·저자극 톤 / 태블릿 가로 / 강조색은 "연결 글자"(amber)와 "성공"(green)에만
+   ============================================================ */
+
+@font-face {
+  font-family: "Jua";
+  src: url("font/Jua-Regular.ttf") format("truetype");
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "Gowun Dodum";
+  src: url("font/GowunDodum-Regular.ttf") format("truetype");
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --bg-top: #EAF3FA;
+  --bg-bot: #FBF7EF;
+  --surface: #FFFFFF;
+  --ink: #3A4654;
+  --ink-soft: #98A6B5;
+  --line: #E3EAF1;
+  --line-strong: #D2DDE7;
+  --rail: #C6D1DC;
+
+  --couple: #EF9740;        /* 연결 글자(끝말) — 따뜻한 호박색 */
+  --couple-soft: #FCE9D2;
+  --success: #56B98A;       /* 성공 — 차분한 세이지 그린 */
+  --success-soft: #E2F3EB;
+
+  --display: "Jua", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --ui: "Gowun Dodum", "Apple SD Gothic Neo", system-ui, sans-serif;
+
+  --r-card: 26px;
+  --shadow: 0 10px 24px rgba(58, 70, 84, 0.10);
+  --shadow-soft: 0 6px 14px rgba(58, 70, 84, 0.07);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--ui);
+  color: var(--ink);
+  background: linear-gradient(170deg, var(--bg-top) 0%, var(--bg-bot) 100%);
+  background-attachment: fixed;
+  -webkit-user-select: none; user-select: none;
+}
+
+#app {
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px 28px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- 상단 바: 진행 별 + 다시 듣기 ---------- */
+#topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#progress { display: flex; gap: 10px; }
+.star {
+  width: 30px; height: 30px;
+  display: inline-block;
+  background: var(--line-strong);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  transition: background-color .25s ease, transform .25s ease;
+}
+.star.is-on { background: var(--success); }
+.star.just-on { animation: pop .45s ease; }
+
+.pill-btn {
+  font-family: var(--ui);
+  font-size: 20px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 12px 22px;
+  display: inline-flex; align-items: center; gap: 8px;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform .08s ease;
+}
+.pill-btn:active { transform: scale(.96); }
+.pill-btn__icon { font-size: 22px; }
+
+/* ---------- 시그니처: 끝말 기차 ---------- */
+#train-wrap {
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  padding: 26px 22px 20px;
+  overflow: hidden;
+}
+#train {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 18px;
+  scroll-behavior: smooth;
+  /* 레일 */
+  background-image: linear-gradient(var(--rail), var(--rail));
+  background-size: calc(100% - 8px) 6px;
+  background-position: 4px calc(100% - 4px);
+  background-repeat: no-repeat;
+}
+#train::-webkit-scrollbar { height: 8px; }
+#train::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 8px; }
+
+.car {
+  flex: 0 0 auto;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.car__body {
+  width: 100%;
+  background: var(--surface);
+  border: 3px solid var(--line-strong);
+  border-radius: 22px;
+  padding: 14px 10px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+.car__pic {
+  width: 86px; height: 86px; object-fit: contain;
+  pointer-events: none;
+}
+.car__word {
+  font-family: var(--display);
+  font-size: 27px;
+  line-height: 1.1;
+  color: var(--ink);
+  text-align: center;
+}
+/* 기차 바퀴 (train read) */
+.car__wheels { display: flex; gap: 34px; margin-top: 7px; }
+.car__wheels span {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--surface);
+  border: 4px solid var(--rail);
+}
+
+/* 연결고리 = 공유 글자(끝말). 강조색 amber. */
+.couple {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-bottom: 25px;       /* 바퀴 높이만큼 위로 정렬 */
+  display: flex; flex-direction: column; align-items: center;
+  width: 46px;
+}
+.couple__hook { height: 3px; width: 100%; background: var(--couple); }
+.couple__token {
+  margin-top: -2px;
+  min-width: 40px; height: 40px;
+  padding: 0 6px;
+  border-radius: 50%;
+  background: var(--couple-soft);
+  border: 3px solid var(--couple);
+  color: var(--couple);
+  font-family: var(--display);
+  font-size: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* 다음에 채울 칸 (placeholder) */
+.car.is-next .car__body {
+  border-style: dashed;
+  border-color: var(--couple);
+  background: var(--couple-soft);
+  box-shadow: none;
+  min-height: 138px;
+  justify-content: center;
+  cursor: default;
+}
+.car.is-next .car__q {
+  font-family: var(--display);
+  font-size: 56px; color: var(--couple);
+}
+
+/* 새 칸 등장 애니메이션 */
+.car--new { animation: rollIn .5s cubic-bezier(.2,.9,.3,1.2) both; }
+
+/* ---------- 프롬프트 ---------- */
+#prompt {
+  margin: 0;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 38px;
+  color: var(--ink);
+  line-height: 1.2;
+}
+#prompt .syl { color: var(--couple); }
+
+/* ---------- 보기 카드 ---------- */
+#options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  flex: 1;
+  align-content: center;
+}
+.opt {
+  font-family: var(--display);
+  background: var(--surface);
+  border: 3px solid var(--line-strong);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
+  padding: 18px 20px 16px;
+  width: 210px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .1s ease, border-color .1s ease;
+}
+.opt:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(58,70,84,.14); }
+.opt:active { transform: translateY(0) scale(.97); }
+.opt.is-picked { border-color: var(--success); animation: pickPulse .45s ease; }
+.opt__pic { width: 120px; height: 120px; object-fit: contain; pointer-events: none; }
+.opt__word { font-size: 34px; color: var(--ink); }
+
+/* ---------- 출처 표기 ---------- */
+#credit {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+/* ---------- 완주 후 돌아보기 ---------- */
+#result {
+  position: fixed; inset: 0;
+  background: rgba(234, 243, 250, .82);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px;
+  z-index: 10;
+  animation: fadeIn .35s ease both;
+}
+#result[hidden] { display: none; }
+#result-card {
+  background: var(--surface);
+  border-radius: 34px;
+  box-shadow: 0 24px 60px rgba(58,70,84,.22);
+  padding: 34px 32px;
+  max-width: 1000px; width: 100%;
+  text-align: center;
+}
+#result-title {
+  font-family: var(--display);
+  font-size: 40px; color: var(--ink); margin: 0 0 22px;
+}
+#result-train {
+  display: flex; align-items: flex-end; gap: 0;
+  overflow-x: auto; padding-bottom: 16px;
+  background-image: linear-gradient(var(--rail), var(--rail));
+  background-size: calc(100% - 8px) 6px;
+  background-position: 4px calc(100% - 4px);
+  background-repeat: no-repeat;
+}
+#result-actions {
+  display: flex; gap: 16px; justify-content: center; align-items: center;
+  margin-top: 26px;
+}
+.big-btn {
+  font-family: var(--display);
+  font-size: 28px; color: #fff;
+  background: var(--success);
+  border: none; border-radius: 999px;
+  padding: 16px 40px; cursor: pointer;
+  box-shadow: 0 10px 22px rgba(86,185,138,.4);
+  transition: transform .08s ease;
+}
+.big-btn:active { transform: scale(.96); }
+
+/* ---------- 애니메이션 ---------- */
+@keyframes rollIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pop {
+  0% { transform: scale(1); } 50% { transform: scale(1.35); } 100% { transform: scale(1); }
+}
+@keyframes pickPulse {
+  0% { transform: scale(1); } 45% { transform: scale(1.06); } 100% { transform: scale(1); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- 세로 화면 대응 ---------- */
+@media (orientation: portrait), (max-width: 760px) {
+  #prompt { font-size: 30px; }
+  .opt { width: 44%; }
+  .opt__pic { width: 96px; height: 96px; }
+}
+
+/* ---------- 저자극: 모션 최소화 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  #train, #result-train { scroll-behavior: auto; }
+}

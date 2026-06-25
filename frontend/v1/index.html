@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>끝말 기차</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app" aria-label="끝말잇기 기차 놀이">
+
+    <header id="topbar">
+      <div id="progress" role="img" aria-label="진행도"></div>
+      <button id="replay" class="pill-btn" type="button" aria-label="다시 듣기">
+        <span class="pill-btn__icon" aria-hidden="true">🔊</span>
+        <span class="pill-btn__label">다시 듣기</span>
+      </button>
+    </header>
+
+    <section id="train-wrap" aria-label="지금까지 이은 단어 기차">
+      <div id="train"></div>
+    </section>
+
+    <p id="prompt" aria-live="polite">불러오는 중…</p>
+
+    <section id="options" aria-label="고를 수 있는 단어"></section>
+
+    <footer id="credit">그림: ARASAAC · CC BY-NC-SA · Sergio Palao / Gobierno de Aragón</footer>
+
+    <!-- 완주 후 돌아보기 화면 -->
+    <section id="result" hidden>
+      <div id="result-card">
+        <h1 id="result-title">오늘 만든 기차예요! 🚂</h1>
+        <div id="result-train"></div>
+        <div id="result-actions">
+          <button id="result-replay" class="pill-btn" type="button">
+            <span class="pill-btn__icon" aria-hidden="true">🔊</span>
+            <span class="pill-btn__label">다시 들어보기</span>
+          </button>
+          <button id="restart" class="big-btn" type="button">한 번 더!</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../../backend/kkutu-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
