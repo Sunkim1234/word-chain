@@ -78,7 +78,7 @@ html = f'''<style>
     --bg-top:#E8F1F8; --bg-bot:#FBF6EE; --surface:#FFFFFF;
     --ink:#38444F; --ink-soft:#94A3B1; --line:#E4ECF3; --line-strong:#D2DDE7;
     --couple:#EE9740; --couple-soft:#FCE8D0; --success:#54B98A; --success-soft:#E3F3EB;
-    --card-edge:#EBCB86; --voice:#5BA7C4; --voice-soft:#E7F2F7;
+    --card-edge:#DAD3C8; --card-edge-strong:#C2B6A6; --voice:#5BA7C4; --voice-soft:#E7F2F7;
     --display:"Jua","Apple SD Gothic Neo",sans-serif; --ui:"Gowun","Apple SD Gothic Neo",sans-serif;
   }}
   *{{ box-sizing:border-box; }}
@@ -145,8 +145,8 @@ html = f'''<style>
     border-radius:3.8cqmin; box-shadow:0 10px 22px rgba(56,68,79,.10); padding:2.6cqmin 2cqmin 2.2cqmin; width:22cqw;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.2cqmin; cursor:pointer;
     transition:transform .1s ease, box-shadow .1s ease, border-color .1s ease, opacity .2s ease; }}
-  .opt:hover {{ transform:translateY(-4px); box-shadow:0 18px 32px rgba(56,68,79,.16); border-color:var(--couple); }}
-  .opt:active {{ transform:translateY(0) scale(.97); box-shadow:0 6px 14px rgba(56,68,79,.14); border-color:var(--couple); }}
+  .opt:hover {{ transform:translateY(-4px); box-shadow:0 18px 32px rgba(56,68,79,.16); border-color:var(--card-edge-strong); }}
+  .opt:active {{ transform:translateY(0) scale(.97); box-shadow:0 6px 14px rgba(56,68,79,.14); border-color:var(--card-edge-strong); }}
   .opt:focus-visible {{ outline:0.6cqmin solid var(--couple); outline-offset:0.4cqmin; }}
   .opt__pic {{ width:16.5cqmin; height:16.5cqmin; object-fit:contain; }}
   .opt__word {{ font-size:4.7cqmin; }}
