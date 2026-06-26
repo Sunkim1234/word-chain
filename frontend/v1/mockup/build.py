@@ -7,10 +7,13 @@
 - 생성된 mockup.html을 Artifact로 배포한다(HANDOFF.md 참고).
 실행: python3 build.py
 """
-import json, os
+import json, os, io, base64
+from fontTools.ttLib import TTFont
+from fontTools import subset
 HERE = os.path.dirname(os.path.abspath(__file__))
 d = json.load(open(os.path.join(HERE, "assets.json")))
-A, F = d["assets"], d["fonts"]
+A = d["assets"]
+FONT_DIR = os.path.join(HERE, "..", "font")
 
 # --- 더미 시나리오 (자동 큐레이션, 모든 단어 그림 보유 확인됨) ---------------
 # 한 라운드 모양은 나중에 엔진 toView 출력과 정렬되도록 잡음:
@@ -34,6 +37,39 @@ IMG = {w: A[w]["uri"] for w in used}
 
 scenario_js = json.dumps(SCENARIO, ensure_ascii=False)
 img_js = json.dumps(IMG, ensure_ascii=False)
+
+# --- 폰트 서브셋: 화면에 실제로 쓰는 글자만 TTF에서 잘라 woff2로 인라인 ---------
+# (서브셋을 미리 구워두면 단어가 바뀔 때 글자가 빠져 시스템 폰트로 폴백된다.
+#  build 때마다 현재 텍스트 기준으로 다시 만들어 누락을 원천 차단한다.)
+UI_TEXT = (
+    "끝말 잇기 로 시작하는 말은? 다시 듣기 말하기 다 이었어요! 진행 "
+    "태블릿 비율 미리보기 그림 "
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    " .,!?:'\"()/+-·ÁÉÍÓÚÑáéíóúñ"  # 크레딧(스페인어 이름)·라틴 보조
+)
+chars = set(UI_TEXT)
+for r in SCENARIO:
+    chars.update(r["now"]); chars.update(r["answer"])
+    for o in r["options"]:
+        chars.update(o)
+
+def subset_woff2(ttf_path, text):
+    font = TTFont(ttf_path)
+    opts = subset.Options()
+    opts.flavor = "woff2"
+    opts.desubroutinize = True
+    ss = subset.Subsetter(options=opts)
+    ss.populate(text=text)
+    ss.subset(font)
+    font.flavor = "woff2"  # API에선 opts.flavor가 적용 안 돼 직접 세팅(안 하면 TTF로 저장됨)
+    buf = io.BytesIO(); font.save(buf)
+    return "data:font/woff2;base64," + base64.b64encode(buf.getvalue()).decode()
+
+text = "".join(sorted(chars))
+F = {
+    "Jua":   subset_woff2(os.path.join(FONT_DIR, "Jua-Regular.ttf"), text),
+    "Gowun": subset_woff2(os.path.join(FONT_DIR, "GowunDodum-Regular.ttf"), text),
+}
 
 html = f'''<style>
   @font-face {{ font-family:"Jua"; src:url("{F['Jua']}") format("woff2"); font-display:swap; }}
@@ -76,13 +112,13 @@ html = f'''<style>
 
   .stage {{ flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2cqh; }}
   .now {{ display:flex; align-items:center; justify-content:center; gap:0; }}
-  .now__card {{ background:var(--surface); border:0.5cqmin solid var(--line-strong); border-radius:3cqmin;
-    padding:1.8cqmin 2.2cqmin; display:flex; flex-direction:column; align-items:center; gap:0.7cqmin;
-    box-shadow:0 8px 18px rgba(56,68,79,.08); }}
-  .now__pic {{ width:11cqmin; height:11cqmin; object-fit:contain; }}
-  .now__word {{ font-family:var(--display); font-size:4.4cqmin; color:var(--ink); }}
+  /* 보기 카드(.opt)와 같은 치수 — 이전 단어/드롭존/보기를 한 종류의 "단어 카드"로 통일 */
+  .now__card {{ background:var(--surface); border:0.5cqmin solid var(--line-strong); border-radius:3.8cqmin;
+    padding:2.6cqmin 2cqmin 2.2cqmin; width:22cqw; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:1.2cqmin; box-shadow:0 8px 18px rgba(56,68,79,.08); }}
+  .now__pic {{ width:16.5cqmin; height:16.5cqmin; object-fit:contain; }}
+  .now__word {{ font-family:var(--display); font-size:4.7cqmin; color:var(--ink); }}
   .now__word .syl {{ color:var(--couple); }}
-  .now__cap {{ font-size:1.9cqmin; color:var(--ink-soft); margin-bottom:0.5cqmin; }}
   .link {{ display:flex; align-items:center; }}
   .link__bar {{ width:2.8cqmin; height:0.6cqmin; background:var(--couple); }}
   .link__tok {{ min-width:4.8cqmin; height:4.8cqmin; padding:0 0.8cqmin; border-radius:50%;
@@ -147,7 +183,6 @@ html = f'''<style>
       <section class="stage" id="stage" aria-label="지금 차례">
         <div class="now">
           <div class="now__card">
-            <div class="now__cap">방금 만든 말</div>
             <img class="now__pic" id="nowPic" alt="">
             <div class="now__word" id="nowWord"></div>
           </div>
