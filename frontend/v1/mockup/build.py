@@ -212,6 +212,8 @@ html = f'''<style>
   @keyframes armedPulse {{
     0%,100%{{ box-shadow:0 0 0 0.6cqmin var(--couple-soft), 0 0 4cqmin 0.6cqmin rgba(238,151,64,.45); }}
     50%{{ box-shadow:0 0 0 0.9cqmin var(--couple-soft), 0 0 6cqmin 1cqmin rgba(238,151,64,.75); }} }}
+  .opt.speaking {{ animation:speakPulse .42s ease; }}
+  @keyframes speakPulse {{ 0%{{ transform:scale(1); }} 45%{{ transform:scale(1.06); }} 100%{{ transform:scale(1); }} }}
   @keyframes finishIn {{ from{{ opacity:0; }} to{{ opacity:1; }} }}
   @keyframes finishPop {{ 0%{{ transform:scale(.4); opacity:0; }} 100%{{ transform:scale(1); opacity:1; }} }}
   @keyframes finishRise {{ from{{ transform:translateY(3cqh); opacity:0; }} to{{ transform:translateY(0); opacity:1; }} }}
@@ -405,8 +407,29 @@ html = f'''<style>
     setTimeout(() => {{ card.style.visibility = 'hidden'; commit(word); }}, 270);
   }}
 
-  // TTS — Task 2에서 본문 구현. 지금은 자리만(탭/롱프레스가 호출).
-  function speak(word, card) {{}}
+  // ── TTS: 한국어 음성으로 단어 읽기 ─────────────────────────────────
+  let _voiceKo = null;
+  function _pickVoice() {{
+    if (!('speechSynthesis' in window)) return;
+    const vs = speechSynthesis.getVoices();
+    _voiceKo = vs.find(v => (v.lang || '').toLowerCase().startsWith('ko')) || null;
+  }}
+  if ('speechSynthesis' in window) {{
+    _pickVoice();
+    speechSynthesis.addEventListener('voiceschanged', _pickVoice);
+  }}
+  function speak(word, card) {{
+    if (card && !reduceMotion) {{
+      card.classList.add('speaking');
+      setTimeout(() => card.classList.remove('speaking'), 420);
+    }}
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();            // 진행 중 음성 끊어 겹침 방지
+    const u = new SpeechSynthesisUtterance(word);
+    u.lang = 'ko-KR'; u.rate = 0.95;
+    if (_voiceKo) u.voice = _voiceKo;
+    speechSynthesis.speak(u);
+  }}
 
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
   function commit(word) {{
