@@ -125,7 +125,10 @@ html = f'''<style>
   .prompt__text .syl {{ color:var(--couple); }}
 
   .stage {{ flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2cqh; }}
-  .now {{ display:flex; align-items:center; justify-content:center; gap:0; }}
+  /* 컨베이어 레인: 카드는 transform 으로 좌우 이동(메인/?칸 항상 1개씩) */
+  .now {{ position:relative; width:54cqw; height:32cqmin; }}
+  .laneCard {{ position:absolute; left:0; top:50%; width:22cqw; transform:translate(0cqw,-50%);
+    transition:transform .42s cubic-bezier(.4,0,.2,1), opacity .42s ease; }}
   /* 보기 카드(.opt)와 같은 치수 — 이전 단어/드롭존/보기를 한 종류의 "단어 카드"로 통일 */
   .now__card {{ background:var(--surface); border:0.5cqmin solid var(--line-strong); border-radius:3.8cqmin;
     padding:2.6cqmin 2cqmin 2.2cqmin; width:22cqw; display:flex; flex-direction:column;
@@ -133,7 +136,7 @@ html = f'''<style>
   .now__pic {{ width:16.5cqmin; height:16.5cqmin; object-fit:contain; }}
   .now__word {{ font-family:var(--display); font-size:4.7cqmin; color:var(--ink); }}
   .now__word .syl {{ color:var(--couple); }}
-  .link {{ display:flex; align-items:center; }}
+  .link {{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2; display:flex; align-items:center; }}
   .link__bar {{ width:2.8cqmin; height:0.6cqmin; background:var(--couple); }}
   .link__tok {{ min-width:7.2cqmin; height:7.2cqmin; padding:0 1.2cqmin; border-radius:50%;
     background:var(--couple-soft); border:0.65cqmin solid var(--couple); color:var(--couple);
@@ -256,13 +259,8 @@ html = f'''<style>
         <div class="progress" id="progress" role="img" aria-label="진행 0 / {TARGET}"></div>
       </header>
       <section class="stage" id="stage" aria-label="지금 차례">
-        <div class="now">
-          <div class="now__card">
-            <img class="now__pic" id="nowPic" alt="">
-            <div class="now__word" id="nowWord"></div>
-          </div>
+        <div class="now" id="nowRow">
           <div class="link"><span class="link__bar"></span><span class="link__tok" id="linkTok"></span><span class="link__bar"></span></div>
-          <div class="drop" id="drop"><span class="drop__q">?</span></div>
         </div>
         <div class="prompt" id="prompt">
           <button class="prompt__speaker" type="button" aria-label="다시 듣기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9.2H6.6L11.5 5V19L6.6 14.8H3Z" fill="#fff"/><path d="M15 8.6a4.6 4.6 0 0 1 0 6.8" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/><path d="M17.7 6a8.2 8.2 0 0 1 0 12" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></button>
@@ -298,18 +296,44 @@ html = f'''<style>
     p.setAttribute('aria-label', '진행 ' + cur + ' / ' + TARGET);
   }}
 
-  // now = state.lastWord(응답 대상 = 직전 AI 단어). 끝글자 = state.currentSyllable(공유 글자)
-  function renderRound() {{
-    const now = state.lastWord;
-    const syl = state.currentSyllable;
-    $('nowPic').src = IMG[now] || ''; $('nowPic').alt = now;
-    $('nowWord').innerHTML = now.slice(0, -1) + '<span class="syl">' + now.slice(-1) + '</span>';
-    $('linkTok').textContent = syl;
-    $('promptText').innerHTML = "'<span class=\\"syl\\">" + syl + "</span>' 로 시작하는 말은?";
+  // ── 컨베이어 레인 헬퍼 ─────────────────────────────────────────────
+  // 레인 위치(가로 이동은 transform). L=메인, R=?칸, OUT=왼쪽 퇴장, IN=오른쪽 진입.
+  const LANE = {{ L:'translate(0cqw,-50%)', R:'translate(32cqw,-50%)',
+                 OUT:'translate(-26cqw,-50%)', IN:'translate(58cqw,-50%)' }};
+  let cMainLane = null, cBoxLane = null;   // 현재 메인 레인 / ?칸 레인
 
-    const drop = $('drop');
-    drop.className = 'drop'; drop.innerHTML = '<span class="drop__q">?</span>';
+  function mainInner(word) {{
+    return '<img class="now__pic" draggable="false" src="' + (IMG[word] || '') + '" alt="' + word + '">' +
+           '<div class="now__word">' + word.slice(0, -1) + '<span class="syl">' + word.slice(-1) + '</span></div>';
+  }}
+  function makeMainLane(word) {{
+    const lane = document.createElement('div'); lane.className = 'laneCard';
+    const card = document.createElement('div'); card.className = 'now__card';
+    card.innerHTML = mainInner(word); lane.appendChild(card); return lane;
+  }}
+  function makeBoxLane() {{
+    const lane = document.createElement('div'); lane.className = 'laneCard';
+    const box = document.createElement('div'); box.className = 'drop'; box.id = 'drop';
+    box.innerHTML = '<span class="drop__q">?</span>'; lane.appendChild(box); return lane;
+  }}
+  function placeLane(lane, pos) {{      // 트랜지션 없이 즉시 배치
+    lane.style.transition = 'none';
+    lane.style.transform = LANE[pos];
+    lane.style.opacity = (pos === 'OUT' || pos === 'IN') ? '0' : '1';
+    $('nowRow').appendChild(lane);
+    void lane.offsetWidth; lane.style.transition = '';   // 이후 이동은 CSS 트랜지션
+  }}
+  function toLane(lane, pos) {{         // 애니메이션 이동
+    lane.style.transform = LANE[pos];
+    lane.style.opacity = (pos === 'OUT' || pos === 'IN') ? '0' : '1';
+  }}
+  function pulseIntro(card) {{
+    if (!card || reduceMotion) return;
+    card.classList.remove('intro'); void card.offsetWidth; card.classList.add('intro');
+  }}
+  function promptHtml(syl) {{ return "'<span class=\\"syl\\">" + syl + "</span>' 로 시작하는 말은?"; }}
 
+  function renderOptions() {{
     const opts = $('options'); opts.innerHTML = '';
     state.options.forEach(w => {{          // 엔진 보장: 2~3개(전부 정답)
       const b = document.createElement('button');
@@ -323,12 +347,21 @@ html = f'''<style>
     v.setAttribute('aria-label', '말하기 (준비 중)');
     v.innerHTML = '<span class="opt__mic" aria-hidden="true">🎤</span><span class="opt__word">말하기</span>';
     opts.appendChild(v);   // 표시만(no-op)
+  }}
 
+  // 정착 상태 렌더(첫 로드 · 재시작 · 모션최소 경로). now = state.lastWord
+  function renderRound() {{
+    const now = state.lastWord;
+    const syl = state.currentSyllable;
+    $('nowRow').querySelectorAll('.laneCard').forEach(c => c.remove());
+    cMainLane = makeMainLane(now); placeLane(cMainLane, 'L');
+    cBoxLane = makeBoxLane(); placeLane(cBoxLane, 'R');
+    $('linkTok').textContent = syl;
+    $('promptText').innerHTML = promptHtml(syl);
+    renderOptions();
     renderProgress();
-
-    // 컴퓨터 차례 안내: now 카드를 살짝 키우며 단어 읽고 → 프롬프트 문장 읽기
-    const nowCard = document.querySelector('.now__card');
-    nowCard.classList.remove('intro'); void nowCard.offsetWidth; nowCard.classList.add('intro');
+    // 컴퓨터 차례 안내: 메인 카드를 살짝 키우며 단어 읽고 → 프롬프트 문장 읽기
+    pulseIntro(cMainLane.firstElementChild);
     speakRound(now, $('promptText').textContent);
   }}
 
@@ -512,23 +545,23 @@ html = f'''<style>
     void el.offsetWidth; el.classList.add('chainpop');
   }}
 
-  // 정답 후: 직전(중앙) 단어 → 연결 글자 → 내가 고른 답 을 차례로 낭독+모션 → 다음 라운드
-  function playChainThenAdvance(prevWord, syl, answer) {{
-    const GAP = 300, FALLBACK = 3500;
-    let advanced = false;
-    const go = () => {{ if (!advanced) {{ advanced = true; advance(); }} }};
+  // 정답 후 연결 낭독: 직전(메인) 단어 → 연결 글자 → 내가 고른 답 을 차례로 낭독+모션 → done()
+  function playReadout(prevWord, syl, answer, done) {{
+    const GAP = 300, FALLBACK = 4000;
+    let fired = false;
+    const finishOnce = () => {{ if (!fired) {{ fired = true; done(); }} }};
 
-    const nowCard = document.querySelector('.now__card');
+    const mainCard = cMainLane.firstElementChild;
     const linkTok = $('linkTok');
-    const drop = $('drop');
+    const boxCard = cBoxLane.firstElementChild;
 
-    if (!('speechSynthesis' in window)) {{   // 음성 미지원: 중앙카드만 살짝 + 진행
-      chainPulse(nowCard);
-      setTimeout(go, 1200);
+    if (!('speechSynthesis' in window)) {{   // 음성 미지원: 메인만 살짝 + 진행
+      chainPulse(mainCard);
+      setTimeout(finishOnce, 1100);
       return;
     }}
 
-    const fb = setTimeout(go, FALLBACK);     // 음성 막힘/지연 대비 보장 진행
+    const fb = setTimeout(finishOnce, FALLBACK);   // 음성 막힘/지연 대비 보장 진행
     const myseq = ++_speakSeq;
     speechSynthesis.cancel();
     const step = (text, el, next) => {{
@@ -538,26 +571,82 @@ html = f'''<style>
       u.onend = () => {{ if (myseq === _speakSeq) setTimeout(next, GAP); }};
       speechSynthesis.speak(u);
     }};
-    step(prevWord, nowCard, () =>
+    step(prevWord, mainCard, () =>
       step(syl, linkTok, () =>
-        step(answer, drop, () => {{ clearTimeout(fb); go(); }})));
+        step(answer, boxCard, () => {{ clearTimeout(fb); finishOnce(); }})));
+  }}
+
+  // 2단계 컨베이어: 답 카드가 메인으로 → 컴퓨터가 ?칸에 새 단어 넣음 → 그게 다시 메인으로
+  function conveyorToNext(answer, C, sylA, sylC) {{
+    // Shift 1: 직전 메인 왼쪽 퇴장, 답(answer)이 메인으로, 오른쪽에 새 ?칸 진입
+    const oldMainLane = cMainLane;
+    const answerLane = cBoxLane;
+    const answerInner = answerLane.firstElementChild;
+    answerInner.removeAttribute('id');               // 더 이상 드롭 타깃 아님
+    answerInner.className = 'now__card';
+    answerInner.innerHTML = mainInner(answer);
+    toLane(oldMainLane, 'OUT');
+    toLane(answerLane, 'L');
+    cMainLane = answerLane;
+    const box1 = makeBoxLane(); placeLane(box1, 'IN'); cBoxLane = box1;
+    requestAnimationFrame(() => toLane(box1, 'R'));
+    setTimeout(() => oldMainLane.remove(), 480);
+    $('linkTok').textContent = sylA;                 // 연결 글자 = answer→C
+
+    setTimeout(() => {{
+      // 컴퓨터가 ?칸에 카드(C)를 넣음 + 읽기
+      const boxInner = cBoxLane.firstElementChild;
+      boxInner.removeAttribute('id');
+      boxInner.className = 'now__card';
+      boxInner.innerHTML = mainInner(C);
+      chainPulse(boxInner);
+      speak(C, null);
+
+      setTimeout(() => {{
+        // Shift 2: 답(answer) 왼쪽 퇴장, C가 메인으로, 새 ?칸 진입
+        const oldMainLane2 = cMainLane;
+        const cLane = cBoxLane;
+        toLane(oldMainLane2, 'OUT');
+        toLane(cLane, 'L');
+        cMainLane = cLane;
+        const box2 = makeBoxLane(); placeLane(box2, 'IN'); cBoxLane = box2;
+        requestAnimationFrame(() => toLane(box2, 'R'));
+        setTimeout(() => oldMainLane2.remove(), 480);
+        $('linkTok').textContent = sylC;             // 연결 글자 = C→아이 다음 답
+
+        setTimeout(() => {{                           // 아이 차례 셋업
+          $('promptText').innerHTML = promptHtml(sylC);
+          renderOptions();
+          renderProgress();
+          speak($('promptText').textContent);        // 프롬프트 읽기
+          locked = false;
+        }}, 520);
+      }}, 1000);
+    }}, 620);
   }}
 
   function commit(word) {{
-    const prevWord = state.lastWord;   // 직전(중앙) 단어 — engine.answer 전에 캡처
-    const syl = state.currentSyllable; // 연결 글자
-    fillDrop(word);                    // 빈 칸 innerHTML 교체(이전 별 자동 제거)
+    const prevWord = state.lastWord;   // 직전(메인) 단어 — engine.answer 전에 캡처
+    const syl = state.currentSyllable; // 연결 글자(메인→답)
+    fillDrop(word);                    // ?칸을 답 카드로 채움(이전 별 자동 제거)
     spawnSparks(10, {{ big: true }});    // 자축 버스트
-    state = engine.answer(word);
+    state = engine.answer(word);       // 아이 한 수 + (안 끝났으면) AI 한 수
     // 정답 파티클 모션이 끝난 뒤에 연결 낭독 시작
-    const startChain = () => playChainThenAdvance(prevWord, syl, word);
-    if (reduceMotion) startChain(); else setTimeout(startChain, 800);
+    const run = () => afterAnswer(prevWord, syl, word);
+    if (reduceMotion) run(); else setTimeout(run, 800);
   }}
 
-  function advance() {{
-    if (state.status !== 'playing') {{ finish(); return; }}
-    renderRound();          // now가 새 AI 단어로 갱신(모델 A)
-    locked = false;
+  function afterAnswer(prevWord, syl, answer) {{
+    const playing = state.status === 'playing';
+    if (reduceMotion) {{                 // 모션 최소: 바로 다음 라운드(또는 종료)
+      if (playing) {{ renderRound(); locked = false; }} else finish();
+      return;
+    }}
+    const C = state.lastWord;            // AI 새 단어
+    const sylC = state.currentSyllable;  // 아이가 다음에 이을 글자(=C 끝글자)
+    const sylA = answer.slice(-1);       // answer→C 연결 글자
+    const done = playing ? () => conveyorToNext(answer, C, sylA, sylC) : finish;
+    playReadout(prevWord, syl, answer, done);
   }}
 
   function finish() {{
