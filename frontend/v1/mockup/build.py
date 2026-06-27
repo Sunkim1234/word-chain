@@ -212,8 +212,8 @@ html = f'''<style>
   @keyframes armedPulse {{
     0%,100%{{ box-shadow:0 0 0 0.6cqmin var(--couple-soft), 0 0 4cqmin 0.6cqmin rgba(238,151,64,.45); }}
     50%{{ box-shadow:0 0 0 0.9cqmin var(--couple-soft), 0 0 6cqmin 1cqmin rgba(238,151,64,.75); }} }}
-  .opt.speaking {{ animation:speakPulse .42s ease; }}
-  @keyframes speakPulse {{ 0%{{ transform:scale(1); }} 45%{{ transform:scale(1.06); }} 100%{{ transform:scale(1); }} }}
+  /* 꾹 누르고 있는 동안: 살짝 떠올라 멈춤(그림자만 — 들림은 인라인 transform) */
+  .opt.holding {{ box-shadow:0 22px 38px rgba(56,68,79,.20); }}
   .spark {{ position:absolute; pointer-events:none; line-height:1; font-size:5cqmin;
     color:var(--card-edge); transform:translate(-50%,-50%) scale(0); will-change:transform,opacity;
     animation:sparkPop .6s ease-out forwards; }}
@@ -375,6 +375,11 @@ html = f'''<style>
       pid = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
       dragging = false; spoke = false;
       card.setPointerCapture(pid);
+      if (!reduceMotion) {{                 // 누르면 살짝 떠올라 멈춤
+        card.style.transition = 'transform .14s ease, box-shadow .14s ease';
+        card.style.transform = 'translateY(-2.4cqmin)';
+        card.classList.add('holding');
+      }}
       lpTimer = setTimeout(() => {{ if (!dragging) {{ speak(word, card); spoke = true; }} }}, 400);
     }});
 
@@ -383,13 +388,15 @@ html = f'''<style>
       dx = e.clientX - sx; dy = e.clientY - sy;
       if (!dragging && Math.hypot(dx, dy) > DRAG_THRESH) {{
         dragging = true; clearTimeout(lpTimer);
+        card.classList.remove('holding');
+        card.style.transition = '';     // .dragging의 transition:none 적용 → 즉각 추종
         card.classList.add('dragging');
         card.parentNode.querySelectorAll('.opt').forEach(o => {{ if (o !== card) o.classList.add('dimmed'); }});
       }}
       if (dragging) {{
         card.style.transform = reduceMotion
           ? 'translate(' + dx + 'px,' + dy + 'px)'
-          : 'translate(' + dx + 'px,' + dy + 'px) scale(1.05) rotate(-2deg)';
+          : 'translate(' + dx + 'px,' + dy + 'px) scale(1.05)';
         if (isOverDrop(card)) armDrop(word); else disarmDrop();
       }}
     }});
@@ -399,7 +406,13 @@ html = f'''<style>
       clearTimeout(lpTimer);
       const id = pid; pid = null;
       try {{ card.releasePointerCapture(id); }} catch (_) {{}}
-      if (!dragging) {{ if (!spoke) speak(word, card); return; }}   // 탭 = 듣기
+      if (!dragging) {{                                  // 탭 = 듣기
+        card.classList.remove('holding');
+        card.style.transition = 'transform .14s ease, box-shadow .14s ease';
+        card.style.transform = '';
+        if (!spoke) speak(word, card);
+        return;
+      }}
       card.classList.remove('dragging');
       disarmDrop();
       if (isOverDrop(card)) snapCommit(card, word, dx, dy);
@@ -409,11 +422,14 @@ html = f'''<style>
     card.addEventListener('pointercancel', () => {{
       if (pid === null) return;
       clearTimeout(lpTimer); pid = null;
+      card.classList.remove('holding');
       if (dragging) {{ card.classList.remove('dragging'); disarmDrop(); springBack(card); }}
+      else {{ card.style.transition = 'transform .14s ease'; card.style.transform = ''; }}
     }});
   }}
 
   function springBack(card) {{
+    card.classList.remove('holding');
     card.parentNode.querySelectorAll('.opt.dimmed').forEach(o => o.classList.remove('dimmed'));
     if (reduceMotion) {{ card.style.transform = ''; return; }}
     card.classList.add('springback');
@@ -452,10 +468,6 @@ html = f'''<style>
     speechSynthesis.addEventListener('voiceschanged', _pickVoice);
   }}
   function speak(word, card) {{
-    if (card && !reduceMotion) {{
-      card.classList.add('speaking');
-      setTimeout(() => card.classList.remove('speaking'), 420);
-    }}
     if (!('speechSynthesis' in window)) return;
     speechSynthesis.cancel();            // 진행 중 음성 끊어 겹침 방지
     const u = new SpeechSynthesisUtterance(word);
