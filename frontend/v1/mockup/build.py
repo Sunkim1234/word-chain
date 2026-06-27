@@ -533,6 +533,11 @@ html = f'''<style>
     renderRound();
   }}
 
+  // 말풍선 스피커: 누르면 현재 프롬프트 문장 다시 읽기
+  document.querySelector('.prompt__speaker').addEventListener('click', () => {{
+    speak($('promptText').textContent);
+  }});
+
   // 비율 토글
   const dev = $('device');
   document.querySelectorAll('.controls button').forEach(b => b.addEventListener('click', () => {{
