@@ -2,6 +2,22 @@
 
 다른 세션에서 이 디자인 작업을 이어가기 위한 문서.
 
+## 2026-06-27 — 드래그+스냅 · TTS · 컨베이어 전환
+
+- **탭→드래그 전환**: 카드를 끌어 ?칸에 1px라도 겹치면 armed(테두리 글로우+별 파티클), 손 떼면 스냅 확정.
+  탭/꾹누르기 = 단어 TTS(ko-KR). 누르면 살짝 떠올라 멈춤(드래그 회전 없음).
+- **TTS 흐름**: 컴퓨터 차례엔 메인카드 팝+단어 읽고 0.3초 뒤 프롬프트 읽기. 정답 후 "직전단어→연결글자→내답"
+  순으로 낭독+팝(연결감). 말풍선 🔊 버튼 = 프롬프트 다시 읽기. 파티클 끝난 뒤(~0.8s) 낭독 시작.
+- **2단계 컨베이어 전환**: 정답 후 [메인 왼쪽 퇴장 → 답이 메인으로 → 컴퓨터가 ?칸에 새 단어 → 그게 메인으로].
+  항상 메인1+?칸1만 보임. 위치는 `.laneCard` transform, 팝은 inner 카드 — 분리해 충돌 방지.
+- **수정은 build.py에서만** → `python3 build.py`로 mockup.html 생성(직접 편집 금지). f-string이라 JS중괄호 `{{ }}`.
+  검증: 빌드 + 2번째 `<script>` 추출해 `node --check` + 아티팩트 육안.
+- **브랜치/배포**: 작업은 `feat/frontend-prototype`(소스 build.py 포함). `origin/main`에는 **mockup.html만**
+  올림 — `frontend/v1/mockup/mockup.html`(컨베이어) + `frontend/v2/mockup/mockup.html`(컨베이어 전 스냅샷).
+  둘 다 자체완결(폰트·이미지·엔진 인라인) → 더블클릭만으로 동작.
+- 스펙/계획: `docs/superpowers/specs/2026-06-27-wordchain-drag-snap-tts-design.md`, `docs/superpowers/plans/2026-06-27-wordchain-drag-snap-tts.md`.
+- **다음에 볼 만한 것**: 컨베이어 슬라이드/대기 타이밍 미세조정, 첫 로드 자동재생(현재 사용자 제스처 필요).
+
 ## 현재 상태 (2026-06-26 — 엔진 연결됨)
 
 **v1 = 탭 → 큰 드롭존 채우기 + 실제 엔진 구동.** 더미 SCENARIO를 걷어내고 진짜
