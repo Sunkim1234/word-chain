@@ -371,26 +371,26 @@ html = f'''<style>
   }}
 
   function attachCard(card, word) {{
-    let pid = null, sx = 0, sy = 0, dx = 0, dy = 0, dragging = false, spoke = false, lpTimer = null;
+    let pid = null, sx = 0, sy = 0, dx = 0, dy = 0, dragging = false;
 
     card.addEventListener('pointerdown', e => {{
       if (locked || state.status !== 'playing') return;
       pid = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
-      dragging = false; spoke = false;
+      dragging = false;
       card.setPointerCapture(pid);
       if (!reduceMotion) {{                 // 누르면 살짝 떠올라 멈춤
         card.style.transition = 'transform .14s ease, box-shadow .14s ease';
         card.style.transform = 'translateY(-2.4cqmin)';
         card.classList.add('holding');
       }}
-      lpTimer = setTimeout(() => {{ if (!dragging) {{ speak(word, card); spoke = true; }} }}, 400);
+      speak(word, card);                    // 누르는 즉시 단어 읽기(지연 없음)
     }});
 
     card.addEventListener('pointermove', e => {{
       if (pid === null) return;
       dx = e.clientX - sx; dy = e.clientY - sy;
       if (!dragging && Math.hypot(dx, dy) > DRAG_THRESH) {{
-        dragging = true; clearTimeout(lpTimer);
+        dragging = true;
         card.classList.remove('holding');
         card.style.transition = '';     // .dragging의 transition:none 적용 → 즉각 추종
         card.classList.add('dragging');
@@ -406,14 +406,12 @@ html = f'''<style>
 
     card.addEventListener('pointerup', e => {{
       if (pid === null) return;
-      clearTimeout(lpTimer);
       const id = pid; pid = null;
       try {{ card.releasePointerCapture(id); }} catch (_) {{}}
-      if (!dragging) {{                                  // 탭 = 듣기
+      if (!dragging) {{                                  // 탭 = 들었다 놓음(읽기는 누르는 즉시 처리됨)
         card.classList.remove('holding');
         card.style.transition = 'transform .14s ease, box-shadow .14s ease';
         card.style.transform = '';
-        if (!spoke) speak(word, card);
         return;
       }}
       card.classList.remove('dragging');
@@ -424,7 +422,7 @@ html = f'''<style>
 
     card.addEventListener('pointercancel', () => {{
       if (pid === null) return;
-      clearTimeout(lpTimer); pid = null;
+      pid = null;
       card.classList.remove('holding');
       if (dragging) {{ card.classList.remove('dragging'); disarmDrop(); springBack(card); }}
       else {{ card.style.transition = 'transform .14s ease'; card.style.transform = ''; }}
