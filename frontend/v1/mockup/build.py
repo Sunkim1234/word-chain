@@ -482,17 +482,24 @@ html = f'''<style>
     if (_voiceKo) u.voice = _voiceKo;
     return u;
   }}
+  let _speakSeq = 0;                     // 발화 순번 — 지연 재생 도중 새 음성이 끼어들면 취소용
   function speak(word, card) {{
     if (!('speechSynthesis' in window)) return;
+    _speakSeq++;
     speechSynthesis.cancel();            // 진행 중 음성 끊어 겹침 방지
     speechSynthesis.speak(_utter(word));
   }}
-  // 컴퓨터 차례 안내: 제시 단어 → 프롬프트 문장 순서로 읽기(큐로 이어 재생)
+  // 컴퓨터 차례 안내: 제시 단어 읽고 → 0.5초 쉰 뒤 → 프롬프트 문장 읽기
   function speakRound(word, sentence) {{
     if (!('speechSynthesis' in window)) return;
+    const seq = ++_speakSeq;
     speechSynthesis.cancel();
-    speechSynthesis.speak(_utter(word));
-    speechSynthesis.speak(_utter(sentence));
+    const u1 = _utter(word);
+    u1.onend = () => {{
+      if (seq !== _speakSeq) return;     // 그 사이 다른 발화가 시작됐으면 중단
+      setTimeout(() => {{ if (seq === _speakSeq) speechSynthesis.speak(_utter(sentence)); }}, 500);
+    }};
+    speechSynthesis.speak(u1);
   }}
 
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
