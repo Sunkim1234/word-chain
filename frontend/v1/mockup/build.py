@@ -152,6 +152,9 @@ html = f'''<style>
   .drop--filled .opt__word {{ font-family:var(--display); font-size:4.7cqmin; }}
 
   /* ── 드래그 상호작용 ───────────────────────────────────────────── */
+  /* 네이티브 이미지 드래그(반투명 고스트) 차단 — 카드 전체가 포인터로 움직이게 */
+  .opt {{ touch-action:none; -webkit-user-select:none; user-select:none; }}
+  .opt__pic, .now__pic {{ -webkit-user-drag:none; user-select:none; pointer-events:none; }}
   /* 드래그 중: 인라인 transform 으로 손가락을 즉각 추종(트랜지션 제거) */
   .opt.dragging {{ z-index:30; cursor:grabbing; transition:none;
     box-shadow:0 24px 44px rgba(56,68,79,.24); }}
@@ -305,7 +308,7 @@ html = f'''<style>
     state.options.forEach(w => {{          // 엔진 보장: 2~3개(전부 정답)
       const b = document.createElement('button');
       b.className = 'opt'; b.type = 'button';
-      b.innerHTML = '<img class="opt__pic" src="' + (IMG[w] || '') + '" alt="' + w + '"><span class="opt__word">' + w + '</span>';
+      b.innerHTML = '<img class="opt__pic" draggable="false" src="' + (IMG[w] || '') + '" alt="' + w + '"><span class="opt__word">' + w + '</span>';
       attachCard(b, w);
       opts.appendChild(b);
     }});
