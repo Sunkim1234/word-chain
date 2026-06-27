@@ -90,7 +90,7 @@ html = f'''<style>
     border:10px solid #2b333c; background:#000; }}
   .device.r1610 {{ aspect-ratio:16/10; }}
   .device.r169 {{ aspect-ratio:16/9; }}
-  .wrap {{ width:100%; height:100%; overflow:hidden;
+  .wrap {{ position:relative; width:100%; height:100%; overflow:hidden;
     background:linear-gradient(168deg,var(--bg-top),var(--bg-bot));
     padding:3.4cqh 4cqw 2cqh; display:flex; flex-direction:column; gap:2.2cqh; }}
 
@@ -103,10 +103,12 @@ html = f'''<style>
   .back:focus-visible {{ outline:0.6cqmin solid var(--couple); outline-offset:0.6cqmin; border-radius:2cqmin; }}
   .back svg {{ width:9.6cqmin; height:9.6cqmin; filter:drop-shadow(0 0.4cqmin 0.5cqmin rgba(56,68,79,.18)); }}
   .progress {{ justify-self:center; display:flex; align-items:center; gap:1.6cqmin; }}
-  .step {{ display:inline-block; transition:background .3s ease, width .3s ease, height .3s ease; }}
-  .step.done {{ width:2cqmin; height:2cqmin; border-radius:50%; background:var(--success); }}
-  .step.cur {{ width:2.6cqmin; height:2.6cqmin; border-radius:50%; background:#fff; border:0.6cqmin solid var(--couple); }}
-  .step.todo {{ width:3.4cqmin; height:0.7cqmin; border-radius:1cqmin; background:var(--line-strong); }}
+  /* 라운드 수만큼 같은 크기의 동그라미를 미리 깔아 둠 — 빈 동그라미=남은 라운드, 채움=완료, 후광=현재 */
+  .step {{ width:2.6cqmin; height:2.6cqmin; border-radius:50%; box-sizing:border-box;
+    transition:background .3s ease, border-color .3s ease, box-shadow .3s ease; }}
+  .step.todo {{ background:transparent; border:0.45cqmin solid var(--line-strong); }}
+  .step.done {{ background:var(--success); }}
+  .step.cur {{ background:var(--couple); box-shadow:0 0 0 0.7cqmin var(--couple-soft); }}
   /* 안내 박스: [스피커] + 문구를 한 덩어리로(레퍼런스 배치). 스타일은 목업 언어(흰 알약·쿨그레이 테두리·부드러운 그림자) */
   .prompt {{ display:inline-flex; align-items:center; gap:2cqmin;
     background:var(--surface); border:0.5cqmin solid var(--line-strong); border-radius:99cqmin;
@@ -149,6 +151,22 @@ html = f'''<style>
   .drop--filled .opt__pic {{ width:16.5cqmin; height:16.5cqmin; object-fit:contain; }}
   .drop--filled .opt__word {{ font-family:var(--display); font-size:4.7cqmin; }}
 
+  /* ── 드래그 상호작용 ───────────────────────────────────────────── */
+  /* 드래그 중: 인라인 transform 으로 손가락을 즉각 추종(트랜지션 제거) */
+  .opt.dragging {{ z-index:30; cursor:grabbing; transition:none;
+    box-shadow:0 24px 44px rgba(56,68,79,.24); }}
+  .opt.dimmed {{ opacity:.4; }}
+  /* 빈 칸 밖에서 놓으면 원래 자리로 탄력 복귀 */
+  .opt.springback {{ transition:transform .34s cubic-bezier(.34,1.32,.5,1); }}
+  /* armed: 카드가 빈 칸에 걸친 상태 — 실선 + 글로우 + 맥동 */
+  .drop.armed {{ border-style:solid;
+    box-shadow:0 0 0 0.6cqmin var(--couple-soft), 0 0 4cqmin 0.6cqmin rgba(238,151,64,.55);
+    animation:armedPulse 1s ease-in-out infinite; }}
+  /* armed 고스트 미리보기(빈 칸 안 .opt 자식의 크기 정의) */
+  .drop .opt__pic {{ width:16.5cqmin; height:16.5cqmin; object-fit:contain; }}
+  .drop .opt__word {{ font-family:var(--display); font-size:4.7cqmin; }}
+  .drop__ghost {{ opacity:.45; }}
+
   .options {{ display:flex; align-items:stretch; justify-content:center; gap:2.4cqw; flex-wrap:nowrap; margin-top:1.2cqh; }}
   .opt {{ font-family:var(--display); background:var(--surface); border:0.8cqmin solid var(--card-edge);
     border-radius:3.8cqmin; box-shadow:0 10px 22px rgba(56,68,79,.10); padding:2.6cqmin 2cqmin 2.2cqmin; width:22cqw;
@@ -164,14 +182,39 @@ html = f'''<style>
   .opt--voice .opt__mic {{ width:9cqmin; height:9cqmin; display:flex; align-items:center; justify-content:center; font-size:8.5cqmin; }}
   .opt--voice .opt__word {{ color:var(--voice); }}
 
-  .done {{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.2cqh;
-    animation:pop .4s ease; }}
-  .done__mark {{ font-size:16cqmin; }}
-  .done__msg {{ margin:0; font-family:var(--display); font-size:6.2cqmin; color:var(--success); }}
+  /* 완료 화면 — 게임이 끝나면 화면 전체를 덮는 오버레이. 목업 본래 톤(흰/쿨그레이/초록=완료 의미)에 맞춤 */
+  .finish {{ position:absolute; inset:0; z-index:40; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    background:linear-gradient(168deg,var(--bg-top),var(--bg-bot));
+    animation:finishIn .35s ease both; }}
+  .finish__title {{ margin:0; font-family:var(--display); font-size:15cqmin; line-height:1.1;
+    white-space:nowrap; color:var(--success);
+    filter:drop-shadow(0 1.6cqmin 0.4cqmin rgba(84,185,138,.20));
+    animation:finishPop .55s cubic-bezier(.2,1.3,.4,1) backwards; }}
+  /* 하단 중앙 고정. 좌우 0+margin-inline:auto 로 중앙정렬해 transform 은 등장·hover 연출용으로 비워 둠 */
+  .finish__btn {{ position:absolute; left:0; right:0; bottom:7cqh; margin-inline:auto;
+    width:42cqmin; height:15.5cqmin; padding:0; cursor:pointer; font:inherit;
+    border:0; border-radius:99cqmin; background:var(--success);
+    box-shadow:0 1.2cqmin 2.6cqmin rgba(84,185,138,.40), 0 8px 18px rgba(56,68,79,.10);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .12s ease, box-shadow .12s ease;
+    animation:finishRise .5s .12s ease backwards; }}
+  .finish__btn:hover {{ transform:translateY(-3px);
+    box-shadow:0 2cqmin 3.4cqmin rgba(84,185,138,.48), 0 12px 24px rgba(56,68,79,.12); }}
+  .finish__btn:active {{ transform:translateY(0) scale(.96);
+    box-shadow:0 0.8cqmin 1.6cqmin rgba(84,185,138,.40); }}
+  .finish__btn:focus-visible {{ outline:0.7cqmin solid var(--success); outline-offset:0.9cqmin; }}
+  .finish__check {{ width:10cqmin; height:10cqmin; }}
 
   .credit {{ text-align:center; font-size:12px; color:#9aa7b4; }}
   @keyframes breathe {{ 0%,100%{{ transform:scale(1); }} 50%{{ transform:scale(1.05); }} }}
   @keyframes pop {{ 0%{{ transform:scale(.82); }} 60%{{ transform:scale(1.04); }} 100%{{ transform:scale(1); }} }}
+  @keyframes armedPulse {{
+    0%,100%{{ box-shadow:0 0 0 0.6cqmin var(--couple-soft), 0 0 4cqmin 0.6cqmin rgba(238,151,64,.45); }}
+    50%{{ box-shadow:0 0 0 0.9cqmin var(--couple-soft), 0 0 6cqmin 1cqmin rgba(238,151,64,.75); }} }}
+  @keyframes finishIn {{ from{{ opacity:0; }} to{{ opacity:1; }} }}
+  @keyframes finishPop {{ 0%{{ transform:scale(.4); opacity:0; }} 100%{{ transform:scale(1); opacity:1; }} }}
+  @keyframes finishRise {{ from{{ transform:translateY(3cqh); opacity:0; }} to{{ transform:translateY(0); opacity:1; }} }}
   @media (prefers-reduced-motion:reduce) {{ *{{ animation:none!important; }} }}
 </style>
 
@@ -248,7 +291,7 @@ html = f'''<style>
       const b = document.createElement('button');
       b.className = 'opt'; b.type = 'button';
       b.innerHTML = '<img class="opt__pic" src="' + (IMG[w] || '') + '" alt="' + w + '"><span class="opt__word">' + w + '</span>';
-      b.addEventListener('click', () => onPick(w, b));
+      attachCard(b, w);
       opts.appendChild(b);
     }});
     const v = document.createElement('button');
@@ -266,21 +309,104 @@ html = f'''<style>
     drop.innerHTML = '<img class="opt__pic" src="' + (IMG[word] || '') + '" alt="' + word + '"><span class="opt__word">' + word + '</span>';
   }}
 
-  function onPick(word, btn) {{
-    if (locked || state.status !== 'playing') return;
-    locked = true;
-    if (reduceMotion) {{ commit(word); return; }}
-    // 날아가는 연출은 곁다리 — 게임 진행은 transitionend가 아니라 보장된 타이머로 한다.
-    const c = btn.getBoundingClientRect(), dr = $('drop').getBoundingClientRect();
-    const dx = (dr.left + dr.width / 2) - (c.left + c.width / 2);
-    const dy = (dr.top + dr.height / 2) - (c.top + c.height / 2);
-    const scale = dr.width / c.width;
-    btn.parentNode.querySelectorAll('.opt').forEach(o => {{ if (o !== btn) o.style.opacity = '0.35'; }});
-    btn.style.zIndex = '30';
-    btn.style.transition = 'transform .38s cubic-bezier(.34,1.15,.5,1)';
-    requestAnimationFrame(() => {{ btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')'; }});
-    setTimeout(() => commit(word), 400);
+  // ── 입력: 드래그=답하기, 탭/롱프레스=듣기 ───────────────────────────
+  const DRAG_THRESH = 8;   // px. 이만큼 움직이면 드래그로 간주
+
+  function rectsOverlap(a, b) {{
+    return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
   }}
+  function isOverDrop(card) {{
+    return rectsOverlap(card.getBoundingClientRect(), $('drop').getBoundingClientRect());
+  }}
+  function armDrop(word) {{
+    const drop = $('drop');
+    if (drop.classList.contains('armed')) return;
+    drop.classList.add('armed');
+    drop.innerHTML = '<img class="opt__pic drop__ghost" src="' + (IMG[word] || '') + '" alt="">' +
+                     '<span class="opt__word drop__ghost">' + word + '</span>';
+  }}
+  function disarmDrop() {{
+    const drop = $('drop');
+    if (!drop.classList.contains('armed')) return;
+    drop.classList.remove('armed');
+    drop.innerHTML = '<span class="drop__q">?</span>';
+  }}
+
+  function attachCard(card, word) {{
+    let pid = null, sx = 0, sy = 0, dx = 0, dy = 0, dragging = false, spoke = false, lpTimer = null;
+
+    card.addEventListener('pointerdown', e => {{
+      if (locked || state.status !== 'playing') return;
+      pid = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+      dragging = false; spoke = false;
+      card.setPointerCapture(pid);
+      lpTimer = setTimeout(() => {{ if (!dragging) {{ speak(word, card); spoke = true; }} }}, 400);
+    }});
+
+    card.addEventListener('pointermove', e => {{
+      if (pid === null) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      if (!dragging && Math.hypot(dx, dy) > DRAG_THRESH) {{
+        dragging = true; clearTimeout(lpTimer);
+        card.classList.add('dragging');
+        card.parentNode.querySelectorAll('.opt').forEach(o => {{ if (o !== card) o.classList.add('dimmed'); }});
+      }}
+      if (dragging) {{
+        card.style.transform = reduceMotion
+          ? 'translate(' + dx + 'px,' + dy + 'px)'
+          : 'translate(' + dx + 'px,' + dy + 'px) scale(1.05) rotate(-2deg)';
+        if (isOverDrop(card)) armDrop(word); else disarmDrop();
+      }}
+    }});
+
+    card.addEventListener('pointerup', e => {{
+      if (pid === null) return;
+      clearTimeout(lpTimer);
+      const id = pid; pid = null;
+      try {{ card.releasePointerCapture(id); }} catch (_) {{}}
+      if (!dragging) {{ if (!spoke) speak(word, card); return; }}   // 탭 = 듣기
+      card.classList.remove('dragging');
+      disarmDrop();
+      if (isOverDrop(card)) snapCommit(card, word, dx, dy);
+      else springBack(card);
+    }});
+
+    card.addEventListener('pointercancel', () => {{
+      if (pid === null) return;
+      clearTimeout(lpTimer); pid = null;
+      if (dragging) {{ card.classList.remove('dragging'); disarmDrop(); springBack(card); }}
+    }});
+  }}
+
+  function springBack(card) {{
+    card.parentNode.querySelectorAll('.opt.dimmed').forEach(o => o.classList.remove('dimmed'));
+    if (reduceMotion) {{ card.style.transform = ''; return; }}
+    card.classList.add('springback');
+    card.style.transform = '';
+    card.addEventListener('transitionend', function h() {{
+      card.classList.remove('springback'); card.style.transition = '';
+      card.removeEventListener('transitionend', h);
+    }});
+  }}
+
+  // armed 상태에서 손 뗌 → 카드가 빈 칸 중앙으로 정렬되며 확정
+  function snapCommit(card, word, curDx, curDy) {{
+    locked = true;
+    if (reduceMotion) {{ card.style.visibility = 'hidden'; commit(word); return; }}
+    const dr = $('drop').getBoundingClientRect();
+    const c = card.getBoundingClientRect();
+    const newDx = curDx + (dr.left + dr.width / 2) - (c.left + c.width / 2);
+    const newDy = curDy + (dr.top + dr.height / 2) - (c.top + c.height / 2);
+    const scale = dr.width / card.offsetWidth;
+    card.style.transition = 'transform .26s cubic-bezier(.34,1.2,.5,1)';
+    requestAnimationFrame(() => {{
+      card.style.transform = 'translate(' + newDx + 'px,' + newDy + 'px) scale(' + scale + ')';
+    }});
+    setTimeout(() => {{ card.style.visibility = 'hidden'; commit(word); }}, 270);
+  }}
+
+  // TTS — Task 2에서 본문 구현. 지금은 자리만(탭/롱프레스가 호출).
+  function speak(word, card) {{}}
 
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
   function commit(word) {{
@@ -297,10 +423,26 @@ html = f'''<style>
 
   function finish() {{
     renderProgress();
-    $('options').innerHTML = '';
-    $('stage').innerHTML =
-      '<div class="done"><div class="done__mark" aria-hidden="true">🎉</div>' +
-      '<p class="done__msg">다 이었어요!</p></div>';
+    const wrap = document.querySelector('.wrap');
+    if (wrap.querySelector('.finish')) return;
+    const o = document.createElement('div');
+    o.className = 'finish';
+    o.innerHTML =
+      '<h2 class="finish__title">다 이었어요!</h2>' +
+      '<button class="finish__btn" type="button" aria-label="다음">' +
+      '<svg class="finish__check" viewBox="0 0 32 32" aria-hidden="true">' +
+      '<path d="M6 16.5L13 23.5L26 8.5" fill="none" stroke="#fff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg></button>';
+    wrap.appendChild(o);
+    o.querySelector('.finish__btn').addEventListener('click', restart);
+  }}
+
+  // 체크 버튼 = 확인. 목업에서는 새 판을 시작해 반복 시연할 수 있게 함.
+  function restart() {{
+    document.querySelectorAll('.finish').forEach(n => n.remove());
+    state = engine.start();
+    locked = false;
+    renderRound();
   }}
 
   // 비율 토글
