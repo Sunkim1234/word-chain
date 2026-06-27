@@ -215,6 +215,9 @@ html = f'''<style>
   @keyframes armedPulse {{
     0%,100%{{ box-shadow:0 0 0 0.6cqmin var(--couple-soft), 0 0 4cqmin 0.6cqmin rgba(238,151,64,.45); }}
     50%{{ box-shadow:0 0 0 0.9cqmin var(--couple-soft), 0 0 6cqmin 1cqmin rgba(238,151,64,.75); }} }}
+  /* 컴퓨터 차례 시작: 제시 카드가 살짝 커졌다 돌아오며 주목을 끎 */
+  .now__card.intro {{ animation:nowPop .5s ease; }}
+  @keyframes nowPop {{ 0%{{ transform:scale(1); }} 30%{{ transform:scale(1.08); }} 100%{{ transform:scale(1); }} }}
   /* 꾹 누르고 있는 동안: 살짝 떠올라 멈춤(그림자만 — 들림은 인라인 transform) */
   .opt.holding {{ box-shadow:0 22px 38px rgba(56,68,79,.20); }}
   .spark {{ position:absolute; pointer-events:none; line-height:1; font-size:5cqmin;
@@ -319,6 +322,11 @@ html = f'''<style>
     opts.appendChild(v);   // 표시만(no-op)
 
     renderProgress();
+
+    // 컴퓨터 차례 안내: now 카드를 살짝 키우며 단어 읽고 → 프롬프트 문장 읽기
+    const nowCard = document.querySelector('.now__card');
+    nowCard.classList.remove('intro'); void nowCard.offsetWidth; nowCard.classList.add('intro');
+    speakRound(now, $('promptText').textContent);
   }}
 
   function fillDrop(word) {{
@@ -468,13 +476,23 @@ html = f'''<style>
     _pickVoice();
     speechSynthesis.addEventListener('voiceschanged', _pickVoice);
   }}
+  function _utter(text) {{
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ko-KR'; u.rate = 0.95;
+    if (_voiceKo) u.voice = _voiceKo;
+    return u;
+  }}
   function speak(word, card) {{
     if (!('speechSynthesis' in window)) return;
     speechSynthesis.cancel();            // 진행 중 음성 끊어 겹침 방지
-    const u = new SpeechSynthesisUtterance(word);
-    u.lang = 'ko-KR'; u.rate = 0.95;
-    if (_voiceKo) u.voice = _voiceKo;
-    speechSynthesis.speak(u);
+    speechSynthesis.speak(_utter(word));
+  }}
+  // 컴퓨터 차례 안내: 제시 단어 → 프롬프트 문장 순서로 읽기(큐로 이어 재생)
+  function speakRound(word, sentence) {{
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(_utter(word));
+    speechSynthesis.speak(_utter(sentence));
   }}
 
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
