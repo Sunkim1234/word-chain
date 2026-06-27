@@ -140,7 +140,7 @@ html = f'''<style>
     font-family:var(--display); font-size:4.35cqmin; display:flex; align-items:center; justify-content:center; }}
 
   /* 큰 드롭존: 보기 카드와 같은 크기로 키워 카드가 1:1로 안착 */
-  .drop {{ width:22cqw; min-height:30cqmin; border:0.8cqmin dashed var(--couple);
+  .drop {{ position:relative; width:22cqw; min-height:30cqmin; border:0.8cqmin dashed var(--couple);
     background:var(--couple-soft); border-radius:3.8cqmin;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.2cqmin;
     padding:2.6cqmin 2cqmin 2.2cqmin; }}
@@ -214,6 +214,19 @@ html = f'''<style>
     50%{{ box-shadow:0 0 0 0.9cqmin var(--couple-soft), 0 0 6cqmin 1cqmin rgba(238,151,64,.75); }} }}
   .opt.speaking {{ animation:speakPulse .42s ease; }}
   @keyframes speakPulse {{ 0%{{ transform:scale(1); }} 45%{{ transform:scale(1.06); }} 100%{{ transform:scale(1); }} }}
+  .spark {{ position:absolute; pointer-events:none; line-height:1; font-size:5cqmin;
+    color:var(--card-edge); transform:translate(-50%,-50%) scale(0); will-change:transform,opacity;
+    animation:sparkPop .6s ease-out forwards; }}
+  .spark.orange {{ color:var(--couple); }}
+  .spark.loop {{ animation:sparkTwinkle 1.4s ease-in-out infinite; }}
+  @keyframes sparkPop {{
+    0%{{ transform:translate(-50%,-50%) scale(0) rotate(0deg); opacity:0; }}
+    40%{{ opacity:1; }}
+    60%{{ transform:translate(-50%,-50%) scale(1.15) rotate(25deg); opacity:1; }}
+    100%{{ transform:translate(-50%,-50%) scale(.9) rotate(40deg); opacity:0; }} }}
+  @keyframes sparkTwinkle {{
+    0%,100%{{ transform:translate(-50%,-50%) scale(.5); opacity:.25; }}
+    50%{{ transform:translate(-50%,-50%) scale(1); opacity:.9; }} }}
   @keyframes finishIn {{ from{{ opacity:0; }} to{{ opacity:1; }} }}
   @keyframes finishPop {{ 0%{{ transform:scale(.4); opacity:0; }} 100%{{ transform:scale(1); opacity:1; }} }}
   @keyframes finishRise {{ from{{ transform:translateY(3cqh); opacity:0; }} to{{ transform:translateY(0); opacity:1; }} }}
@@ -326,12 +339,32 @@ html = f'''<style>
     drop.classList.add('armed');
     drop.innerHTML = '<img class="opt__pic drop__ghost" src="' + (IMG[word] || '') + '" alt="">' +
                      '<span class="opt__word drop__ghost">' + word + '</span>';
+    spawnSparks(6);                    // 진입 버스트
+    spawnSparks(3, {{ loop: true }});    // 머무는 동안 트윙클
   }}
   function disarmDrop() {{
     const drop = $('drop');
     if (!drop.classList.contains('armed')) return;
     drop.classList.remove('armed');
     drop.innerHTML = '<span class="drop__q">?</span>';
+  }}
+
+  function clearSparks() {{ $('drop').querySelectorAll('.spark').forEach(s => s.remove()); }}
+  function spawnSparks(n, opts) {{
+    if (reduceMotion) return;
+    opts = opts || {{}};
+    const drop = $('drop');
+    for (let i = 0; i < n; i++) {{
+      const s = document.createElement('span');
+      s.className = 'spark' + (i % 2 ? ' orange' : '') + (opts.loop ? ' loop' : '');
+      s.textContent = '✦';
+      s.style.left = (8 + Math.random() * 84) + '%';
+      s.style.top = (8 + Math.random() * 84) + '%';
+      s.style.animationDelay = (Math.random() * (opts.loop ? 1.2 : 0.25)).toFixed(2) + 's';
+      if (opts.big) s.style.fontSize = '7.5cqmin';
+      drop.appendChild(s);
+      if (!opts.loop) setTimeout(() => s.remove(), 900);
+    }}
   }}
 
   function attachCard(card, word) {{
@@ -433,7 +466,8 @@ html = f'''<style>
 
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
   function commit(word) {{
-    fillDrop(word);
+    fillDrop(word);                    // 빈 칸 innerHTML 교체(이전 별 자동 제거)
+    spawnSparks(10, {{ big: true }});    // 자축 버스트
     state = engine.answer(word);
     setTimeout(advance, 480);
   }}
