@@ -508,7 +508,8 @@ html = f'''<style>
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
   function chainPulse(el) {{
     if (!el || reduceMotion) return;
-    el.classList.remove('chainpop'); void el.offsetWidth; el.classList.add('chainpop');
+    el.classList.remove('chainpop', 'intro');   // intro 가 specificity로 chainpop을 덮지 않게
+    void el.offsetWidth; el.classList.add('chainpop');
   }}
 
   // 정답 후: 직전(중앙) 단어 → 연결 글자 → 내가 고른 답 을 차례로 낭독+모션 → 다음 라운드
@@ -548,7 +549,9 @@ html = f'''<style>
     fillDrop(word);                    // 빈 칸 innerHTML 교체(이전 별 자동 제거)
     spawnSparks(10, {{ big: true }});    // 자축 버스트
     state = engine.answer(word);
-    playChainThenAdvance(prevWord, syl, word);
+    // 정답 파티클 모션이 끝난 뒤에 연결 낭독 시작
+    const startChain = () => playChainThenAdvance(prevWord, syl, word);
+    if (reduceMotion) startChain(); else setTimeout(startChain, 800);
   }}
 
   function advance() {{
