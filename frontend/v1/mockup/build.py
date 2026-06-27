@@ -497,7 +497,7 @@ html = f'''<style>
     const u1 = _utter(word);
     u1.onend = () => {{
       if (seq !== _speakSeq) return;     // 그 사이 다른 발화가 시작됐으면 중단
-      setTimeout(() => {{ if (seq === _speakSeq) speechSynthesis.speak(_utter(sentence)); }}, 500);
+      setTimeout(() => {{ if (seq === _speakSeq) speechSynthesis.speak(_utter(sentence)); }}, 300);
     }};
     speechSynthesis.speak(u1);
   }}
