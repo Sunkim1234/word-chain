@@ -218,6 +218,9 @@ html = f'''<style>
   /* 컴퓨터 차례 시작: 제시 카드가 살짝 커졌다 돌아오며 주목을 끎 */
   .now__card.intro {{ animation:nowPop .5s ease; }}
   @keyframes nowPop {{ 0%{{ transform:scale(1); }} 30%{{ transform:scale(1.08); }} 100%{{ transform:scale(1); }} }}
+  /* 정답 후 연결 낭독: 읽히는 요소가 살짝 튐(중앙카드·연결글자·내 답) */
+  .chainpop {{ animation:chainPop .45s ease; }}
+  @keyframes chainPop {{ 0%{{ transform:scale(1); }} 35%{{ transform:scale(1.12); }} 100%{{ transform:scale(1); }} }}
   /* 꾹 누르고 있는 동안: 살짝 떠올라 멈춤(그림자만 — 들림은 인라인 transform) */
   .opt.holding {{ box-shadow:0 22px 38px rgba(56,68,79,.20); }}
   .spark {{ position:absolute; pointer-events:none; line-height:1; font-size:5cqmin;
@@ -503,11 +506,49 @@ html = f'''<style>
   }}
 
   // 아이 한 수 + (안 끝났으면) AI 한 수를 엔진이 처리 → 480ms 후 다음 라운드
+  function chainPulse(el) {{
+    if (!el || reduceMotion) return;
+    el.classList.remove('chainpop'); void el.offsetWidth; el.classList.add('chainpop');
+  }}
+
+  // 정답 후: 직전(중앙) 단어 → 연결 글자 → 내가 고른 답 을 차례로 낭독+모션 → 다음 라운드
+  function playChainThenAdvance(prevWord, syl, answer) {{
+    const GAP = 300, FALLBACK = 3500;
+    let advanced = false;
+    const go = () => {{ if (!advanced) {{ advanced = true; advance(); }} }};
+
+    const nowCard = document.querySelector('.now__card');
+    const linkTok = $('linkTok');
+    const drop = $('drop');
+
+    if (!('speechSynthesis' in window)) {{   // 음성 미지원: 중앙카드만 살짝 + 진행
+      chainPulse(nowCard);
+      setTimeout(go, 1200);
+      return;
+    }}
+
+    const fb = setTimeout(go, FALLBACK);     // 음성 막힘/지연 대비 보장 진행
+    const myseq = ++_speakSeq;
+    speechSynthesis.cancel();
+    const step = (text, el, next) => {{
+      if (myseq !== _speakSeq) return;       // 끼어든 발화 있으면 체인 중단(fallback이 진행)
+      chainPulse(el);
+      const u = _utter(text);
+      u.onend = () => {{ if (myseq === _speakSeq) setTimeout(next, GAP); }};
+      speechSynthesis.speak(u);
+    }};
+    step(prevWord, nowCard, () =>
+      step(syl, linkTok, () =>
+        step(answer, drop, () => {{ clearTimeout(fb); go(); }})));
+  }}
+
   function commit(word) {{
+    const prevWord = state.lastWord;   // 직전(중앙) 단어 — engine.answer 전에 캡처
+    const syl = state.currentSyllable; // 연결 글자
     fillDrop(word);                    // 빈 칸 innerHTML 교체(이전 별 자동 제거)
     spawnSparks(10, {{ big: true }});    // 자축 버스트
     state = engine.answer(word);
-    setTimeout(advance, 480);
+    playChainThenAdvance(prevWord, syl, word);
   }}
 
   function advance() {{
