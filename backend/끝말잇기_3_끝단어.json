@@ -1,0 +1,1691 @@
+{
+  "meta": {
+    "title": "끝말잇기 쉬운버전 - 끝 단어 (4번째)",
+    "level": "유아 ~ 초등 2학년",
+    "pos": "명사 (2글자 이상)",
+    "role": "끝 단어 (4번째)",
+    "total": 186,
+    "fields": {
+      "cont": "이 단어의 끝 음절로 시작하는 단어 수 (뒤로 이어붙일 수 있는 단어 수, 클수록 잇기 쉬움)",
+      "reach": "이 단어의 첫 음절로 끝나는 단어 수 (이 단어 앞에 올 수 있는 단어 수, 클수록 도달하기 쉬움)"
+    },
+    "connectivity_basis": "전체 고유 단어(2plus 529 + nouns 734 병합 후 중복제거) 기준으로 계산",
+    "note": "끝 음절이 막다른(이어지는 단어 1개 이하) 2글자 이상 단어. 끝 음절은 어려워도 됨. 도달하기 쉬운(reach 큰) 순 정렬."
+  },
+  "words": [
+    {
+      "word": "리코더",
+      "category": "악기와예술",
+      "start": "리",
+      "end": "더",
+      "length": 3,
+      "cont": 0,
+      "reach": 30
+    },
+    {
+      "word": "이끼",
+      "category": "자연과날씨",
+      "start": "이",
+      "end": "끼",
+      "length": 2,
+      "cont": 0,
+      "reach": 28
+    },
+    {
+      "word": "이슬",
+      "category": "자연과날씨",
+      "start": "이",
+      "end": "슬",
+      "length": 2,
+      "cont": 1,
+      "reach": 28
+    },
+    {
+      "word": "지폐",
+      "category": "일상사물",
+      "start": "지",
+      "end": "폐",
+      "length": 2,
+      "cont": 0,
+      "reach": 19
+    },
+    {
+      "word": "지퍼",
+      "category": "옷과장신구",
+      "start": "지",
+      "end": "퍼",
+      "length": 2,
+      "cont": 1,
+      "reach": 19
+    },
+    {
+      "word": "지하철",
+      "category": "탈것",
+      "start": "지",
+      "end": "철",
+      "length": 3,
+      "cont": 1,
+      "reach": 19
+    },
+    {
+      "word": "자물쇠",
+      "category": "일상사물",
+      "start": "자",
+      "end": "쇠",
+      "length": 3,
+      "cont": 0,
+      "reach": 14
+    },
+    {
+      "word": "구슬",
+      "category": "놀이와운동",
+      "start": "구",
+      "end": "슬",
+      "length": 2,
+      "cont": 1,
+      "reach": 13
+    },
+    {
+      "word": "개울",
+      "category": "자연과날씨",
+      "start": "개",
+      "end": "울",
+      "length": 2,
+      "cont": 0,
+      "reach": 12
+    },
+    {
+      "word": "미끄럼틀",
+      "category": "놀이와운동",
+      "start": "미",
+      "end": "틀",
+      "length": 4,
+      "cont": 0,
+      "reach": 11
+    },
+    {
+      "word": "미술",
+      "category": "악기와예술",
+      "start": "미",
+      "end": "술",
+      "length": 2,
+      "cont": 0,
+      "reach": 11
+    },
+    {
+      "word": "미술관",
+      "category": "장소",
+      "start": "미",
+      "end": "관",
+      "length": 3,
+      "cont": 0,
+      "reach": 11
+    },
+    {
+      "word": "무릎",
+      "category": "신체",
+      "start": "무",
+      "end": "릎",
+      "length": 2,
+      "cont": 0,
+      "reach": 10
+    },
+    {
+      "word": "비눗방울",
+      "category": "일상사물",
+      "start": "비",
+      "end": "울",
+      "length": 4,
+      "cont": 0,
+      "reach": 10
+    },
+    {
+      "word": "치킨",
+      "category": "음식",
+      "start": "치",
+      "end": "킨",
+      "length": 2,
+      "cont": 0,
+      "reach": 10
+    },
+    {
+      "word": "무당벌레",
+      "category": "동물",
+      "start": "무",
+      "end": "레",
+      "length": 4,
+      "cont": 1,
+      "reach": 10
+    },
+    {
+      "word": "비빔밥",
+      "category": "음식",
+      "start": "비",
+      "end": "밥",
+      "length": 3,
+      "cont": 1,
+      "reach": 10
+    },
+    {
+      "word": "마늘",
+      "category": "채소",
+      "start": "마",
+      "end": "늘",
+      "length": 2,
+      "cont": 0,
+      "reach": 9
+    },
+    {
+      "word": "수족관",
+      "category": "장소",
+      "start": "수",
+      "end": "관",
+      "length": 3,
+      "cont": 0,
+      "reach": 9
+    },
+    {
+      "word": "색연필",
+      "category": "학교와학용품",
+      "start": "색",
+      "end": "필",
+      "length": 3,
+      "cont": 1,
+      "reach": 9
+    },
+    {
+      "word": "수레",
+      "category": "탈것",
+      "start": "수",
+      "end": "레",
+      "length": 2,
+      "cont": 1,
+      "reach": 9
+    },
+    {
+      "word": "수프",
+      "category": "음식",
+      "start": "수",
+      "end": "프",
+      "length": 2,
+      "cont": 1,
+      "reach": 9
+    },
+    {
+      "word": "소금",
+      "category": "음식",
+      "start": "소",
+      "end": "금",
+      "length": 2,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "스테이플러",
+      "category": "학교와학용품",
+      "start": "스",
+      "end": "러",
+      "length": 5,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "실로폰",
+      "category": "악기와예술",
+      "start": "실",
+      "end": "폰",
+      "length": 3,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "터널",
+      "category": "장소",
+      "start": "터",
+      "end": "널",
+      "length": 2,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "트라이앵글",
+      "category": "악기와예술",
+      "start": "트",
+      "end": "글",
+      "length": 5,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "트램펄린",
+      "category": "놀이와운동",
+      "start": "트",
+      "end": "린",
+      "length": 4,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "트럼펫",
+      "category": "악기와예술",
+      "start": "트",
+      "end": "펫",
+      "length": 3,
+      "cont": 0,
+      "reach": 8
+    },
+    {
+      "word": "스케치북",
+      "category": "학교와학용품",
+      "start": "스",
+      "end": "북",
+      "length": 4,
+      "cont": 1,
+      "reach": 8
+    },
+    {
+      "word": "스파게티",
+      "category": "음식",
+      "start": "스",
+      "end": "티",
+      "length": 4,
+      "cont": 1,
+      "reach": 8
+    },
+    {
+      "word": "트랙터",
+      "category": "탈것",
+      "start": "트",
+      "end": "터",
+      "length": 3,
+      "cont": 1,
+      "reach": 8
+    },
+    {
+      "word": "레몬",
+      "category": "과일",
+      "start": "레",
+      "end": "몬",
+      "length": 2,
+      "cont": 0,
+      "reach": 7
+    },
+    {
+      "word": "대추",
+      "category": "과일",
+      "start": "대",
+      "end": "추",
+      "length": 2,
+      "cont": 1,
+      "reach": 7
+    },
+    {
+      "word": "추석",
+      "category": "시간과자연현상",
+      "start": "추",
+      "end": "석",
+      "length": 2,
+      "cont": 1,
+      "reach": 7
+    },
+    {
+      "word": "사람",
+      "category": "가족과사람",
+      "start": "사",
+      "end": "람",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "사슴",
+      "category": "동물",
+      "start": "사",
+      "end": "슴",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "사인펜",
+      "category": "학교와학용품",
+      "start": "사",
+      "end": "펜",
+      "length": 3,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "사촌",
+      "category": "가족과사람",
+      "start": "사",
+      "end": "촌",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "사탕",
+      "category": "음식",
+      "start": "사",
+      "end": "탕",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "어깨",
+      "category": "신체",
+      "start": "어",
+      "end": "깨",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "어른",
+      "category": "가족과사람",
+      "start": "어",
+      "end": "른",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "어묵",
+      "category": "음식",
+      "start": "어",
+      "end": "묵",
+      "length": 2,
+      "cont": 0,
+      "reach": 6
+    },
+    {
+      "word": "사각형",
+      "category": "도형과색",
+      "start": "사",
+      "end": "형",
+      "length": 3,
+      "cont": 1,
+      "reach": 6
+    },
+    {
+      "word": "모래",
+      "category": "자연과날씨",
+      "start": "모",
+      "end": "래",
+      "length": 2,
+      "cont": 0,
+      "reach": 5
+    },
+    {
+      "word": "도마뱀",
+      "category": "동물",
+      "start": "도",
+      "end": "뱀",
+      "length": 3,
+      "cont": 1,
+      "reach": 5
+    },
+    {
+      "word": "고드름",
+      "category": "자연과날씨",
+      "start": "고",
+      "end": "름",
+      "length": 3,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "고래",
+      "category": "동물",
+      "start": "고",
+      "end": "래",
+      "length": 2,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "드럼",
+      "category": "악기와예술",
+      "start": "드",
+      "end": "럼",
+      "length": 2,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "부엌",
+      "category": "집과가구",
+      "start": "부",
+      "end": "엌",
+      "length": 2,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "새싹",
+      "category": "자연과날씨",
+      "start": "새",
+      "end": "싹",
+      "length": 2,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "서랍",
+      "category": "집과가구",
+      "start": "서",
+      "end": "랍",
+      "length": 2,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "시험",
+      "category": "학교와학용품",
+      "start": "시",
+      "end": "험",
+      "length": 2,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "정글짐",
+      "category": "놀이와운동",
+      "start": "정",
+      "end": "짐",
+      "length": 3,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "프라이팬",
+      "category": "주방과그릇",
+      "start": "프",
+      "end": "팬",
+      "length": 4,
+      "cont": 0,
+      "reach": 4
+    },
+    {
+      "word": "방석",
+      "category": "집과가구",
+      "start": "방",
+      "end": "석",
+      "length": 2,
+      "cont": 1,
+      "reach": 4
+    },
+    {
+      "word": "부추",
+      "category": "채소",
+      "start": "부",
+      "end": "추",
+      "length": 2,
+      "cont": 1,
+      "reach": 4
+    },
+    {
+      "word": "새벽",
+      "category": "시간과자연현상",
+      "start": "새",
+      "end": "벽",
+      "length": 2,
+      "cont": 1,
+      "reach": 4
+    },
+    {
+      "word": "양말",
+      "category": "옷과장신구",
+      "start": "양",
+      "end": "말",
+      "length": 2,
+      "cont": 1,
+      "reach": 4
+    },
+    {
+      "word": "양배추",
+      "category": "채소",
+      "start": "양",
+      "end": "추",
+      "length": 3,
+      "cont": 1,
+      "reach": 4
+    },
+    {
+      "word": "전등",
+      "category": "집과가구",
+      "start": "전",
+      "end": "등",
+      "length": 2,
+      "cont": 1,
+      "reach": 4
+    },
+    {
+      "word": "경찰",
+      "category": "가족과사람",
+      "start": "경",
+      "end": "찰",
+      "length": 2,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "계란",
+      "category": "음식",
+      "start": "계",
+      "end": "란",
+      "length": 2,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "다람쥐",
+      "category": "동물",
+      "start": "다",
+      "end": "쥐",
+      "length": 3,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "라임",
+      "category": "과일",
+      "start": "라",
+      "end": "임",
+      "length": 2,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "발가락",
+      "category": "신체",
+      "start": "발",
+      "end": "락",
+      "length": 3,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "발바닥",
+      "category": "신체",
+      "start": "발",
+      "end": "닥",
+      "length": 3,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "석류",
+      "category": "과일",
+      "start": "석",
+      "end": "류",
+      "length": 2,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "파랑",
+      "category": "도형과색",
+      "start": "파",
+      "end": "랑",
+      "length": 2,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "퍼즐",
+      "category": "놀이와운동",
+      "start": "퍼",
+      "end": "즐",
+      "length": 2,
+      "cont": 0,
+      "reach": 3
+    },
+    {
+      "word": "라이터",
+      "category": "일상사물",
+      "start": "라",
+      "end": "터",
+      "length": 3,
+      "cont": 1,
+      "reach": 3
+    },
+    {
+      "word": "파인애플",
+      "category": "과일",
+      "start": "파",
+      "end": "플",
+      "length": 4,
+      "cont": 1,
+      "reach": 3
+    },
+    {
+      "word": "거울",
+      "category": "집과가구",
+      "start": "거",
+      "end": "울",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "거위",
+      "category": "동물",
+      "start": "거",
+      "end": "위",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "그릇",
+      "category": "주방과그릇",
+      "start": "그",
+      "end": "릇",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "그림",
+      "category": "악기와예술",
+      "start": "그",
+      "end": "림",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "박물관",
+      "category": "장소",
+      "start": "박",
+      "end": "관",
+      "length": 3,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "박쥐",
+      "category": "동물",
+      "start": "박",
+      "end": "쥐",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "버섯",
+      "category": "채소",
+      "start": "버",
+      "end": "섯",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "생일",
+      "category": "시간과자연현상",
+      "start": "생",
+      "end": "일",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "아욱",
+      "category": "채소",
+      "start": "아",
+      "end": "욱",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "아이스크림",
+      "category": "음식",
+      "start": "아",
+      "end": "림",
+      "length": 5,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "아주머니",
+      "category": "가족과사람",
+      "start": "아",
+      "end": "니",
+      "length": 4,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "조끼",
+      "category": "옷과장신구",
+      "start": "조",
+      "end": "끼",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "주머니",
+      "category": "옷과장신구",
+      "start": "주",
+      "end": "니",
+      "length": 3,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "주사위",
+      "category": "놀이와운동",
+      "start": "주",
+      "end": "위",
+      "length": 3,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "주황",
+      "category": "도형과색",
+      "start": "주",
+      "end": "황",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "카페",
+      "category": "장소",
+      "start": "카",
+      "end": "페",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "카펫",
+      "category": "집과가구",
+      "start": "카",
+      "end": "펫",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "키위",
+      "category": "과일",
+      "start": "키",
+      "end": "위",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "티셔츠",
+      "category": "옷과장신구",
+      "start": "티",
+      "end": "츠",
+      "length": 3,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "표범",
+      "category": "동물",
+      "start": "표",
+      "end": "범",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "필통",
+      "category": "학교와학용품",
+      "start": "필",
+      "end": "통",
+      "length": 2,
+      "cont": 0,
+      "reach": 2
+    },
+    {
+      "word": "거북",
+      "category": "동물",
+      "start": "거",
+      "end": "북",
+      "length": 2,
+      "cont": 1,
+      "reach": 2
+    },
+    {
+      "word": "김밥",
+      "category": "음식",
+      "start": "김",
+      "end": "밥",
+      "length": 2,
+      "cont": 1,
+      "reach": 2
+    },
+    {
+      "word": "버터",
+      "category": "음식",
+      "start": "버",
+      "end": "터",
+      "length": 2,
+      "cont": 1,
+      "reach": 2
+    },
+    {
+      "word": "빵집",
+      "category": "장소",
+      "start": "빵",
+      "end": "집",
+      "length": 2,
+      "cont": 1,
+      "reach": 2
+    },
+    {
+      "word": "슬리퍼",
+      "category": "옷과장신구",
+      "start": "슬",
+      "end": "퍼",
+      "length": 3,
+      "cont": 1,
+      "reach": 2
+    },
+    {
+      "word": "주말",
+      "category": "시간과자연현상",
+      "start": "주",
+      "end": "말",
+      "length": 2,
+      "cont": 1,
+      "reach": 2
+    },
+    {
+      "word": "가슴",
+      "category": "신체",
+      "start": "가",
+      "end": "슴",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "가재",
+      "category": "동물",
+      "start": "가",
+      "end": "재",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "공작",
+      "category": "동물",
+      "start": "공",
+      "end": "작",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "노랑",
+      "category": "도형과색",
+      "start": "노",
+      "end": "랑",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "눈썹",
+      "category": "신체",
+      "start": "눈",
+      "end": "썹",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "달력",
+      "category": "집과가구",
+      "start": "달",
+      "end": "력",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "돌고래",
+      "category": "동물",
+      "start": "돌",
+      "end": "래",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "동굴",
+      "category": "자연과날씨",
+      "start": "동",
+      "end": "굴",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "로봇",
+      "category": "놀이와운동",
+      "start": "로",
+      "end": "봇",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "로션",
+      "category": "몸과건강",
+      "start": "로",
+      "end": "션",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "로켓",
+      "category": "탈것",
+      "start": "로",
+      "end": "켓",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "목련",
+      "category": "꽃과식물",
+      "start": "목",
+      "end": "련",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "목욕탕",
+      "category": "장소",
+      "start": "목",
+      "end": "탕",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "바구니",
+      "category": "주방과그릇",
+      "start": "바",
+      "end": "니",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "바람",
+      "category": "자연과날씨",
+      "start": "바",
+      "end": "람",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "바위",
+      "category": "자연과날씨",
+      "start": "바",
+      "end": "위",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "바이올린",
+      "category": "악기와예술",
+      "start": "바",
+      "end": "린",
+      "length": 4,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "배꼽",
+      "category": "신체",
+      "start": "배",
+      "end": "꼽",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "백합",
+      "category": "꽃과식물",
+      "start": "백",
+      "end": "합",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "봉투",
+      "category": "일상사물",
+      "start": "봉",
+      "end": "투",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "분홍",
+      "category": "도형과색",
+      "start": "분",
+      "end": "홍",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "빗자루",
+      "category": "일상사물",
+      "start": "빗",
+      "end": "루",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "속눈썹",
+      "category": "신체",
+      "start": "속",
+      "end": "썹",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "손가락",
+      "category": "신체",
+      "start": "손",
+      "end": "락",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "손님",
+      "category": "가족과사람",
+      "start": "손",
+      "end": "님",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "오빠",
+      "category": "가족과사람",
+      "start": "오",
+      "end": "빠",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "외투",
+      "category": "옷과장신구",
+      "start": "외",
+      "end": "투",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "요일",
+      "category": "시간과자연현상",
+      "start": "요",
+      "end": "일",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "잠수함",
+      "category": "탈것",
+      "start": "잠",
+      "end": "함",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "저금통",
+      "category": "일상사물",
+      "start": "저",
+      "end": "통",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "진달래",
+      "category": "꽃과식물",
+      "start": "진",
+      "end": "래",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "철쭉",
+      "category": "꽃과식물",
+      "start": "철",
+      "end": "쭉",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "코코넛",
+      "category": "과일",
+      "start": "코",
+      "end": "넛",
+      "length": 3,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "하루",
+      "category": "시간과자연현상",
+      "start": "하",
+      "end": "루",
+      "length": 2,
+      "cont": 0,
+      "reach": 1
+    },
+    {
+      "word": "가게",
+      "category": "장소",
+      "start": "가",
+      "end": "게",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "단추",
+      "category": "옷과장신구",
+      "start": "단",
+      "end": "추",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "바퀴벌레",
+      "category": "동물",
+      "start": "바",
+      "end": "레",
+      "length": 4,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "배추",
+      "category": "채소",
+      "start": "배",
+      "end": "추",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "상추",
+      "category": "채소",
+      "start": "상",
+      "end": "추",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "손전등",
+      "category": "일상사물",
+      "start": "손",
+      "end": "등",
+      "length": 3,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "손톱",
+      "category": "신체",
+      "start": "손",
+      "end": "톱",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "연못",
+      "category": "자연과날씨",
+      "start": "연",
+      "end": "못",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "오각형",
+      "category": "도형과색",
+      "start": "오",
+      "end": "형",
+      "length": 3,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "진흙",
+      "category": "자연과날씨",
+      "start": "진",
+      "end": "흙",
+      "length": 2,
+      "cont": 1,
+      "reach": 1
+    },
+    {
+      "word": "내일",
+      "category": "시간과자연현상",
+      "start": "내",
+      "end": "일",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "머리카락",
+      "category": "신체",
+      "start": "머",
+      "end": "락",
+      "length": 4,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "머리핀",
+      "category": "옷과장신구",
+      "start": "머",
+      "end": "핀",
+      "length": 3,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "멜론",
+      "category": "과일",
+      "start": "멜",
+      "end": "론",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "블록",
+      "category": "놀이와운동",
+      "start": "블",
+      "end": "록",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "삼촌",
+      "category": "가족과사람",
+      "start": "삼",
+      "end": "촌",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "샴푸",
+      "category": "몸과건강",
+      "start": "샴",
+      "end": "푸",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "설탕",
+      "category": "음식",
+      "start": "설",
+      "end": "탕",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "성냥",
+      "category": "일상사물",
+      "start": "성",
+      "end": "냥",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "쓰레기통",
+      "category": "집과가구",
+      "start": "쓰",
+      "end": "통",
+      "length": 4,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "언니",
+      "category": "가족과사람",
+      "start": "언",
+      "end": "니",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "언덕",
+      "category": "자연과날씨",
+      "start": "언",
+      "end": "덕",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "얼굴",
+      "category": "신체",
+      "start": "얼",
+      "end": "굴",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "에어컨",
+      "category": "집과가구",
+      "start": "에",
+      "end": "컨",
+      "length": 3,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "젓가락",
+      "category": "주방과그릇",
+      "start": "젓",
+      "end": "락",
+      "length": 3,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "천둥",
+      "category": "자연과날씨",
+      "start": "천",
+      "end": "둥",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "초록",
+      "category": "도형과색",
+      "start": "초",
+      "end": "록",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "초콜릿",
+      "category": "음식",
+      "start": "초",
+      "end": "릿",
+      "length": 3,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "캐스터네츠",
+      "category": "악기와예술",
+      "start": "캐",
+      "end": "츠",
+      "length": 5,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "캥거루",
+      "category": "동물",
+      "start": "캥",
+      "end": "루",
+      "length": 3,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "커튼",
+      "category": "집과가구",
+      "start": "커",
+      "end": "튼",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "클립",
+      "category": "학교와학용품",
+      "start": "클",
+      "end": "립",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "튤립",
+      "category": "꽃과식물",
+      "start": "튤",
+      "end": "립",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "펭귄",
+      "category": "동물",
+      "start": "펭",
+      "end": "귄",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "할머니",
+      "category": "가족과사람",
+      "start": "할",
+      "end": "니",
+      "length": 3,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "현관",
+      "category": "집과가구",
+      "start": "현",
+      "end": "관",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "휴일",
+      "category": "시간과자연현상",
+      "start": "휴",
+      "end": "일",
+      "length": 2,
+      "cont": 0,
+      "reach": 0
+    },
+    {
+      "word": "걸레",
+      "category": "일상사물",
+      "start": "걸",
+      "end": "레",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "낙엽",
+      "category": "자연과날씨",
+      "start": "낙",
+      "end": "엽",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "명절",
+      "category": "시간과자연현상",
+      "start": "명",
+      "end": "절",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "민들레",
+      "category": "꽃과식물",
+      "start": "민",
+      "end": "레",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "볶음밥",
+      "category": "음식",
+      "start": "볶",
+      "end": "밥",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "삼각형",
+      "category": "도형과색",
+      "start": "삼",
+      "end": "형",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "설날",
+      "category": "시간과자연현상",
+      "start": "설",
+      "end": "날",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "애벌레",
+      "category": "동물",
+      "start": "애",
+      "end": "레",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "얼룩말",
+      "category": "동물",
+      "start": "얼",
+      "end": "말",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "점퍼",
+      "category": "옷과장신구",
+      "start": "점",
+      "end": "퍼",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "참외",
+      "category": "과일",
+      "start": "참",
+      "end": "외",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "칠판",
+      "category": "학교와학용품",
+      "start": "칠",
+      "end": "판",
+      "length": 2,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "컴퓨터",
+      "category": "집과가구",
+      "start": "컴",
+      "end": "터",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "테이프",
+      "category": "학교와학용품",
+      "start": "테",
+      "end": "프",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "햄스터",
+      "category": "동물",
+      "start": "햄",
+      "end": "터",
+      "length": 3,
+      "cont": 1,
+      "reach": 0
+    },
+    {
+      "word": "훌라후프",
+      "category": "놀이와운동",
+      "start": "훌",
+      "end": "프",
+      "length": 4,
+      "cont": 1,
+      "reach": 0
+    }
+  ]
+}
