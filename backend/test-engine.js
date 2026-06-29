@@ -1,70 +1,95 @@
-// 엔진 자체 검증: 수천 판을 랜덤으로 플레이해 5턴 100% 도달 확인 + 통계
+/* 끝말잇기 엔진 검증 시뮬레이션 (Node) */
 const fs = require('fs');
+const path = require('path');
 const KkutuEngine = require('./kkutu-engine.js');
 
-const data = JSON.parse(fs.readFileSync('kids_nouns_safe_2plus.json', 'utf8'));
+const dir = __dirname;
+const s = JSON.parse(fs.readFileSync(path.join(dir, '끝말잇기_1_시작단어.json'), 'utf8'));
+const m = JSON.parse(fs.readFileSync(path.join(dir, '끝말잇기_2_중간단어.json'), 'utf8'));
+const e = JSON.parse(fs.readFileSync(path.join(dir, '끝말잇기_3_끝단어.json'), 'utf8'));
 
-// 재현 가능한 시드 난수
-function mulberry32(seed) {
-  return function () {
-    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+const startSet = new Set(s.words.map(w => w.word));
+const middleSet = new Set(m.words.map(w => w.word));
+const endSet = new Set(e.words.map(w => w.word));
 
-const rng = mulberry32(12345);
-const engine = new KkutuEngine(data.words, { targetAnswers: 5, rng });
-console.log('안전 시작 단어 수:', engine.safeStartWords.length);
+// 시드 난수(재현 가능)
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 
+const ROLES = {1:{1:'ai',2:'child',3:'ai',4:'child'},2:{1:'child',2:'ai',3:'child',4:'ai'}};
 const N = 5000;
-let won = 0, lost = 0, badOptions = 0, repeats = 0;
-const optDist = { 1: 0, 2: 0, 3: 0 };
+let fails = 0;
+const childOptCounts = [];
+const stats = {won:0, lost:0, words8:0};
+let example = null;
 
 for (let i = 0; i < N; i++) {
-  let state = engine.start();
-  const seen = new Set(state.history.map((h) => h.word));
-  let safe = true;
-  while (state.status === 'playing') {
-    const opts = state.options;
-    optDist[opts.length] = (optDist[opts.length] || 0) + 1;
-    if (opts.length < 2) badOptions++;
-    // 모든 보기가 현재 음절로 시작하는 정답인지 검증
-    for (const o of opts) {
-      if (o[0] !== state.currentSyllable) safe = false;
-      if (seen.has(o)) safe = false; // 보기에 이미 쓴 단어가 있으면 안 됨
+  const rng = mulberry32(i + 1);
+  const eng = new KkutuEngine({start:s.words, middle:m.words, end:e.words}, {rng, optionsCount:3});
+  let st = eng.start();
+  const problems = [];
+
+  let guard = 0;
+  while (st.status === 'playing') {
+    if (++guard > 50) { problems.push('무한루프'); break; }
+    // 아이 차례: 보기 개수 확인
+    if (st.options.length !== 3) problems.push(`아이 보기 ${st.options.length}개 (자리 r${st.round}p${st.position})`);
+    childOptCounts.push(st.options.length);
+    // 보기 음절 검증
+    for (const o of st.options) {
+      if (st.currentSyllable != null && o[0] !== st.currentSyllable)
+        problems.push(`보기 시작음절 불일치: ${o} vs ${st.currentSyllable}`);
     }
-    const choice = opts[Math.floor(rng() * opts.length)];
-    if (seen.has(choice)) repeats++;
-    seen.add(choice);
-    state = engine.answer(choice);
-    // AI가 방금 둔 단어도 중복 아닌지
-    if (state.lastWord && state.history.filter((h) => h.word === state.lastWord).length > 1) repeats++;
+    const pick = st.options[Math.floor(rng() * st.options.length)];
+    st = eng.answer(pick);
   }
-  if (state.status === 'won') won++; else lost++;
+
+  if (st.status === 'won') stats.won++; else stats.lost++;
+  const h = st.history;
+
+  // 검증들
+  if (st.status !== 'won') problems.push('won 아님: ' + st.status);
+  if (h.length !== 8) problems.push(`총 단어 ${h.length}개`); else stats.words8++;
+
+  // 중복 없음
+  const ws = h.map(x => x.word);
+  if (new Set(ws).size !== ws.length) problems.push('단어 중복 발생');
+
+  // 라운드/자리/담당자/풀/체인 검증
+  for (let r = 1; r <= 2; r++) {
+    const rh = h.filter(x => x.round === r).sort((a,b)=>a.pos-b.pos);
+    if (rh.length !== 4) { problems.push(`라운드${r} 단어 ${rh.length}개`); continue; }
+    for (let p = 1; p <= 4; p++) {
+      const cell = rh[p-1];
+      if (cell.pos !== p) problems.push(`자리 어긋남 r${r}`);
+      if (cell.by !== ROLES[r][p]) problems.push(`담당자 어긋남 r${r}p${p}: ${cell.by}`);
+      // 자리별 풀
+      const w = cell.word;
+      if (p === 1 && !(startSet.has(w)||middleSet.has(w))) problems.push(`1번 풀위반 ${w}`);
+      if ((p === 2 || p === 3) && !middleSet.has(w)) problems.push(`${p}번 풀위반(중간아님) ${w}`);
+      if (p === 4 && !(endSet.has(w)||middleSet.has(w))) problems.push(`4번 풀위반 ${w}`);
+      // 체인 연결
+      if (p > 1) {
+        const prev = rh[p-2].word;
+        if (w[0] !== prev[prev.length-1]) problems.push(`체인 끊김 r${r}p${p}: ${prev}->${w}`);
+      }
+    }
+  }
+
+  if (problems.length) {
+    fails++;
+    if (fails <= 5) console.log(`게임 ${i}: `, problems.slice(0,4).join(' | '));
+  }
+  if (i === 0) example = h;
 }
 
-console.log(`\n${N}판 결과`);
-console.log(`  승리(아이 5번 답 완주): ${won}/${N} = ${(won / N * 100).toFixed(1)}%`);
-console.log(`  실패(도중 막힘): ${lost}`);
-console.log(`  보기 2개 미만으로 떨어진 차례: ${badOptions}`);
-console.log(`  단어 재사용(중복) 발생: ${repeats}`);
-console.log(`  제시된 보기 개수 분포: 2개=${optDist[2]}, 3개=${optDist[3]}` +
-  ` (3개 비율 ${(optDist[3] / (optDist[2] + optDist[3]) * 100).toFixed(0)}%)`);
-
-// 샘플 한 판 출력
-const s0 = mulberry32(777);
-const e2 = new KkutuEngine(data.words, { targetAnswers: 5, rng: s0 });
-let st = e2.start();
-console.log('\n샘플 한 판 진행:');
-console.log('  AI 시작:', st.history[0].word);
-let guard = 0;
-while (st.status === 'playing' && guard++ < 20) {
-  console.log(`  [${st.currentSyllable}]로 시작하는 보기: ${st.options.join(', ')}`);
-  const pick = st.options[0];
-  st = e2.answer(pick);
-  console.log(`    아이 선택: ${pick}` + (st.history.slice(-1)[0].by === 'ai' && st.status === 'playing'
-    ? ` -> AI: ${st.lastWord}` : ''));
+console.log('\n=== 결과 ===');
+console.log(`총 ${N}판 | won=${stats.won} lost=${stats.lost} | 8단어=${stats.words8}`);
+console.log(`실패(규칙위반) 게임 수: ${fails}`);
+const bad = childOptCounts.filter(c => c !== 3).length;
+console.log(`아이 차례 총 ${childOptCounts.length}회, 보기≠3 인 경우: ${bad}`);
+console.log('\n예시 게임 (게임0):');
+for (const x of example) {
+  const pool = startSet.has(x.word)?'시작': middleSet.has(x.word)?'중간':'끝';
+  console.log(`  R${x.round} ${x.pos}번 [${x.by==='ai'?'AI ':'아이'}] ${x.word} (${pool})`);
 }
-console.log('  결과:', st.status, '| 아이가 답한 횟수:', st.childAnswers);
+console.log(fails === 0 ? '\n✅ 모든 검증 통과' : `\n❌ ${fails}판에서 문제 발견`);
