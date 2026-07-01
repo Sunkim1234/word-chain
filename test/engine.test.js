@@ -1,12 +1,12 @@
 /* 끝말잇기 엔진 검증 시뮬레이션 (Node) */
 const fs = require('fs');
 const path = require('path');
-const KkutuEngine = require('./kkutu-engine.js');
+const KkutuEngine = require('../src/engine.js');
 
-const dir = __dirname;
-const s = JSON.parse(fs.readFileSync(path.join(dir, '끝말잇기_1_시작단어.json'), 'utf8'));
-const m = JSON.parse(fs.readFileSync(path.join(dir, '끝말잇기_2_중간단어.json'), 'utf8'));
-const e = JSON.parse(fs.readFileSync(path.join(dir, '끝말잇기_3_끝단어.json'), 'utf8'));
+const dir = path.join(__dirname, '..', 'data');
+const s = JSON.parse(fs.readFileSync(path.join(dir, 'start-words.json'), 'utf8'));
+const m = JSON.parse(fs.readFileSync(path.join(dir, 'middle-words.json'), 'utf8'));
+const e = JSON.parse(fs.readFileSync(path.join(dir, 'end-words.json'), 'utf8'));
 
 const startSet = new Set(s.words.map(w => w.word));
 const middleSet = new Set(m.words.map(w => w.word));
