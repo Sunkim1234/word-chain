@@ -22,9 +22,9 @@
  *
  * 사용 예 (브라우저)
  *   const [s, m, e] = await Promise.all([
- *     fetch('끝말잇기_1_시작단어.json').then(r => r.json()),
- *     fetch('끝말잇기_2_중간단어.json').then(r => r.json()),
- *     fetch('끝말잇기_3_끝단어.json').then(r => r.json()),
+ *     fetch('data/start-words.json').then(r => r.json()),
+ *     fetch('data/middle-words.json').then(r => r.json()),
+ *     fetch('data/end-words.json').then(r => r.json()),
  *   ]);
  *   const engine = new KkutuEngine({ start: s.words, middle: m.words, end: e.words });
  *   let state = engine.start();           // state.options = 보기 (전부 정답)

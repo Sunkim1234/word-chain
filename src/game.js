@@ -1,7 +1,7 @@
 // src/game.js
 import { makeUI } from './ui.js';
 import { attachCard, attachListen } from './drag.js';
-import { speak, speakRound, speakChain, speakSeq, bumpSeq } from './tts.js';
+import { speak, speakRound, speakChain, bumpSeq } from './tts.js';
 import { spawnSparks, clearSparks, chainPulse } from './effect.js';
 
 const reduceMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;

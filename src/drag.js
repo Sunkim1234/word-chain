@@ -11,7 +11,8 @@ function isOverDrop(card, drop) {
 function armDrop(drop, word, d) {
   if (drop.classList.contains('armed')) return;
   drop.classList.add('armed');
-  drop.innerHTML = '<img class="opt__pic drop__ghost" src="' + (d.imgSrc(word) || '') + '" alt="">' +
+  const src = d.imgSrc(word);
+  drop.innerHTML = (src ? '<img class="opt__pic drop__ghost" draggable="false" src="' + src + '" alt="' + word + '">' : '') +
                    '<span class="opt__word drop__ghost">' + word + '</span>';
   d.spawnSparks(drop, 6);
   d.spawnSparks(drop, 3, { loop: true });
