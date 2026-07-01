@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>끝말잇기</title>
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="controls">
+    <span>태블릿 비율 미리보기:</span>
+    <button data-r="">4:3 (iPad)</button>
+    <button data-r="r1610" class="active">16:10 · Tab A11+</button>
+    <button data-r="r169">16:9</button>
+  </div>
+  <div class="device r1610" id="device">
+    <div class="wrap">
+      <header class="topbar">
+        <button class="back" type="button" aria-label="뒤로 가기"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6.5 16L16 7V13H25V19H16V25Z" fill="#38444F" stroke="#38444F" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+        <div class="progress" id="progress" role="img" aria-label="진행 0 / 5"></div>
+      </header>
+      <section class="stage" id="stage" aria-label="지금 차례">
+        <div class="now">
+          <div class="now__card" role="button" tabindex="0" aria-label="단어 다시 듣기">
+            <img class="now__pic" id="nowPic" alt="">
+            <div class="now__word" id="nowWord"></div>
+          </div>
+          <div class="link"><span class="link__bar"></span><span class="link__tok" id="linkTok" role="button" tabindex="0" aria-label="글자 듣기"></span><span class="link__bar"></span></div>
+          <div class="drop" id="drop"><span class="drop__q">?</span></div>
+        </div>
+        <div class="prompt" id="prompt">
+          <button class="prompt__speaker" type="button" aria-label="다시 듣기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9.2H6.6L11.5 5V19L6.6 14.8H3Z" fill="#fff"/><path class="wave wave1" d="M15 8.6a4.6 4.6 0 0 1 0 6.8" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/><path class="wave wave2" d="M17.7 6a8.2 8.2 0 0 1 0 12" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></button>
+          <p class="prompt__text" id="promptText"></p>
+        </div>
+      </section>
+      <section class="options" id="options" aria-label="고를 수 있는 단어"></section>
+    </div>
+  </div>
+  <div class="credit">그림: ARASAAC · CC BY-NC-SA · Sergio Palao / Gobierno de Aragón</div>
+</div>
+  <script src="src/engine.js"></script>
+  <script type="module" src="src/game.js"></script>
+</body>
+</html>
